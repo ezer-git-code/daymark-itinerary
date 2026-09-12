@@ -1,7 +1,7 @@
-import { n as create, t as persist } from "../_libs/zustand.mjs";
+import { n as persist, r as create, t as createJSONStorage } from "../_libs/zustand.mjs";
 import { n as clsx } from "../_libs/class-variance-authority+clsx.mjs";
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/utils-BbOUFaVl.js
+//#region node_modules/.nitro/vite/services/ssr/assets/utils-DUQlNDci.js
 var CURRENCIES = [
 	{
 		code: "USD",
@@ -261,22 +261,7 @@ function parseMoney(raw) {
 	return n;
 }
 async function fetchRatesFromHome(home) {
-	try {
-		const url = `https://api.frankfurter.app/latest?from=${encodeURIComponent(home)}`;
-		const res = await fetch(url);
-		if (!res.ok) return fallbackFromHome(home);
-		const data = await res.json();
-		if (!data.rates) return fallbackFromHome(home);
-		return {
-			base: data.base ?? home,
-			rates: {
-				...data.rates,
-				[home]: 1
-			}
-		};
-	} catch {
-		return fallbackFromHome(home);
-	}
+	return fallbackFromHome(home);
 }
 function fallbackFromHome(home) {
 	const homePerUsd = USD_FALLBACK[home];
@@ -500,6 +485,14 @@ var useAppStore = create()(persist((set, get) => ({
 }), {
 	name: "daymark-v1",
 	skipHydration: true,
+	storage: createJSONStorage(() => {
+		if (typeof window === "undefined") return {
+			getItem: () => null,
+			setItem: () => {},
+			removeItem: () => {}
+		};
+		return localStorage;
+	}),
 	partialize: (s) => ({
 		hasOnboarded: s.hasOnboarded,
 		homeCurrency: s.homeCurrency,
@@ -512,17 +505,23 @@ var useAppStore = create()(persist((set, get) => ({
 		activeTripId: s.activeTripId
 	})
 }));
+var EMPTY_LOCATIONS = [];
+var EMPTY_ITEMS = [];
 function useActiveTrip() {
-	return useAppStore((s) => {
-		if (!s.activeTripId) return s.trips[0] ?? null;
-		return s.trips.find((t) => t.id === s.activeTripId) ?? s.trips[0] ?? null;
-	});
+	const trips = useAppStore((s) => s.trips);
+	const activeTripId = useAppStore((s) => s.activeTripId);
+	if (!activeTripId) return trips[0] ?? null;
+	return trips.find((t) => t.id === activeTripId) ?? trips[0] ?? null;
+}
+function useTripLocations(tripId) {
+	const locations = useAppStore((s) => s.locations);
+	if (!tripId) return EMPTY_LOCATIONS;
+	return locations.filter((l) => l.tripId === tripId).slice().sort((a, b) => a.date.localeCompare(b.date) || a.sortOrder - b.sortOrder);
 }
 function useTripItems(tripId) {
-	return useAppStore((s) => {
-		if (!tripId) return [];
-		return s.items.filter((i) => i.tripId === tripId).slice().sort((a, b) => a.date.localeCompare(b.date) || a.title.localeCompare(b.title));
-	});
+	const items = useAppStore((s) => s.items);
+	if (!tripId) return EMPTY_ITEMS;
+	return items.filter((i) => i.tripId === tripId).slice().sort((a, b) => a.date.localeCompare(b.date) || a.title.localeCompare(b.title));
 }
 function localPerHomeForTrip(trip, state) {
 	if (!trip) return null;
@@ -540,4 +539,4 @@ function cn(...inputs) {
 	return twMerge(clsx(inputs));
 }
 //#endregion
-export { localPerHomeForTrip as a, sumHome as c, useTripItems as d, formatRate as i, useActiveTrip as l, cn as n, localToHome as o, formatMoney as r, parseMoney as s, CURRENCIES as t, useAppStore as u };
+export { localPerHomeForTrip as a, sumHome as c, useTripItems as d, useTripLocations as f, formatRate as i, useActiveTrip as l, cn as n, localToHome as o, formatMoney as r, parseMoney as s, CURRENCIES as t, useAppStore as u };

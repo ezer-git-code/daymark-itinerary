@@ -1,7 +1,7 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
 import { t as cva } from "../_libs/class-variance-authority+clsx.mjs";
-import { a as localPerHomeForTrip, c as sumHome, d as useTripItems, i as formatRate, l as useActiveTrip, n as cn, r as formatMoney, t as CURRENCIES, u as useAppStore } from "./utils-BbOUFaVl.mjs";
+import { a as localPerHomeForTrip, c as sumHome, d as useTripItems, f as useTripLocations, i as formatRate, l as useActiveTrip, n as cn, r as formatMoney, t as CURRENCIES, u as useAppStore } from "./utils-DUQlNDci.mjs";
 import { d as useRouterState, v as Link } from "../_libs/@tanstack/react-router+[...].mjs";
 import { r as Slot, s as require_jsx_runtime } from "../_libs/@radix-ui/react-collection+[...].mjs";
 import { _ as Check, f as Columns3, g as ChevronDown, l as List, o as Plus, p as ClipboardList, t as X, u as House, v as CalendarDays } from "../_libs/lucide-react.mjs";
@@ -9,7 +9,7 @@ import { a as DialogOverlay$1, i as DialogDescription$1, n as DialogClose, o as 
 import { t as Root } from "../_libs/radix-ui__react-label.mjs";
 import { a as Root2, i as Portal2, n as Item2, o as Separator2, r as Label2, s as Trigger, t as Content2 } from "../_libs/@radix-ui/react-dropdown-menu+[...].mjs";
 import { a as SelectItemIndicator, c as SelectTrigger$1, i as SelectItem$1, l as SelectValue$1, n as SelectContent$1, o as SelectItemText, r as SelectIcon, s as SelectPortal, t as Select$1, u as SelectViewport } from "../_libs/@radix-ui/react-select+[...].mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/app-shell-BOnkccWv.js
+//#region node_modules/.nitro/vite/services/ssr/assets/app-shell-CYN2PeM-.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function BudgetLedger({ budget, estimated, actual, homeCurrency }) {
@@ -581,64 +581,77 @@ function AppShell({ children, title, actions }) {
 				className: "sticky top-0 z-30 border-b border-border/80 bg-background/90 backdrop-blur-sm",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 sm:px-6",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
-						to: "/",
-						className: "font-display text-xl tracking-tight text-foreground",
-						children: "Daymark"
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "ml-auto flex items-center gap-2",
-						children: [trips.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DropdownMenu, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuTrigger, {
-							asChild: true,
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-								variant: "outline",
-								size: "sm",
-								className: "max-w-44 sm:max-w-56",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "truncate",
-									children: trip?.name ?? "Select trip"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronDown, { className: "size-4 opacity-60" })]
-							})
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DropdownMenuContent, {
-							align: "end",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuLabel, { children: "Trips" }),
-								trips.map((t) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuItem, {
-									onClick: () => setActiveTrip(t.id),
-									children: t.name
-								}, t.id)),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuSeparator, {}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DropdownMenuItem, {
-									onClick: () => {
-										setEditingTrip(false);
-										setTripOpen(true);
-									},
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, { className: "size-4" }), " New trip"]
-								}),
-								trip && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuItem, {
-									onClick: () => {
-										setEditingTrip(true);
-										setTripOpen(true);
-									},
-									children: "Edit trip"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuItem, {
-									className: "text-destructive",
-									onClick: () => deleteTrip(trip.id),
-									children: "Delete trip"
-								})] })
-							]
-						})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select, {
-							value: homeCurrency,
-							onValueChange: setHomeCurrency,
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectTrigger, {
-								className: "h-9 w-24 px-2 text-xs",
-								"aria-label": "Home currency",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectValue, {})
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectContent, { children: CURRENCIES.map((c) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
-								value: c.code,
-								children: c.code
-							}, c.code)) })]
-						})]
-					})]
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+							to: "/",
+							className: "font-display text-xl tracking-tight text-foreground",
+							children: "Daymark"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
+							className: "ml-4 hidden items-center gap-1 sm:flex",
+							"aria-label": "Views",
+							children: NAV.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+								to: item.to,
+								className: cn("flex h-9 items-center rounded-sm px-3 text-sm font-medium transition-colors duration-150", pathname === item.to ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-accent hover:text-foreground"),
+								"aria-current": pathname === item.to ? "page" : void 0,
+								children: item.label
+							}, item.to))
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "ml-auto flex items-center gap-2",
+							children: [trips.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DropdownMenu, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuTrigger, {
+								asChild: true,
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+									variant: "outline",
+									size: "sm",
+									className: "max-w-44 sm:max-w-56",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "truncate",
+										children: trip?.name ?? "Select trip"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronDown, { className: "size-4 opacity-60" })]
+								})
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DropdownMenuContent, {
+								align: "end",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuLabel, { children: "Trips" }),
+									trips.map((t) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuItem, {
+										onClick: () => setActiveTrip(t.id),
+										children: t.name
+									}, t.id)),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuSeparator, {}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DropdownMenuItem, {
+										onClick: () => {
+											setEditingTrip(false);
+											setTripOpen(true);
+										},
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, { className: "size-4" }), " New trip"]
+									}),
+									trip && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuItem, {
+										onClick: () => {
+											setEditingTrip(true);
+											setTripOpen(true);
+										},
+										children: "Edit trip"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuItem, {
+										className: "text-destructive",
+										onClick: () => deleteTrip(trip.id),
+										children: "Delete trip"
+									})] })
+								]
+							})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select, {
+								value: homeCurrency,
+								onValueChange: setHomeCurrency,
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectTrigger, {
+									className: "h-9 w-24 px-2 text-xs",
+									"aria-label": "Home currency",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectValue, {})
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectContent, { children: CURRENCIES.map((c) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+									value: c.code,
+									children: c.code
+								}, c.code)) })]
+							})]
+						})
+					]
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", {
@@ -714,7 +727,7 @@ function useTripWorkspace() {
 	const homeCurrency = useAppStore((s) => s.homeCurrency);
 	const rates = useAppStore((s) => s.rates);
 	const ratesBase = useAppStore((s) => s.ratesBase);
-	const locations = useAppStore((s) => trip ? s.locations.filter((l) => l.tripId === trip.id).slice().sort((a, b) => a.date.localeCompare(b.date) || a.sortOrder - b.sortOrder) : []);
+	const locations = useTripLocations(trip?.id);
 	const items = useTripItems(trip?.id);
 	const localPerHome = localPerHomeForTrip(trip, {
 		homeCurrency,

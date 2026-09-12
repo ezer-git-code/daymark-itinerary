@@ -1,12 +1,12 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
-import { n as cn, u as useAppStore } from "./utils-BbOUFaVl.mjs";
+import { n as cn, u as useAppStore } from "./utils-DUQlNDci.mjs";
 import { _ as createRootRoute, g as createFileRoute, h as lazyRouteComponent, l as Scripts, m as Outlet, p as createRouter, u as HeadContent, y as useRouter } from "../_libs/@tanstack/react-router+[...].mjs";
 import { s as require_jsx_runtime } from "../_libs/@radix-ui/react-collection+[...].mjs";
 import { r as TriangleAlert } from "../_libs/lucide-react.mjs";
 import { a as union, i as string, n as number, r as object, t as literal } from "../_libs/zod.mjs";
 import { a as Trigger, i as Root3, n as Portal, r as Provider, t as Content2 } from "../_libs/radix-ui__react-tooltip.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-BuvT41XO.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-Dy-bUS7p.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var __defProp = Object.defineProperty;
@@ -313,25 +313,23 @@ function PreviewHostBridge() {
 function HydrateGate({ children }) {
 	const [ready, setReady] = (0, import_react.useState)(false);
 	(0, import_react.useEffect)(() => {
-		const persistApi = useAppStore.persist;
-		let finished = false;
-		const finish = () => {
-			if (finished) return;
-			finished = true;
+		let cancelled = false;
+		async function boot() {
+			try {
+				const persistApi = useAppStore.persist;
+				if (persistApi?.rehydrate) await Promise.race([Promise.resolve(persistApi.rehydrate()), new Promise((resolve) => setTimeout(resolve, 400))]);
+			} catch {}
+			if (cancelled) return;
 			const state = useAppStore.getState();
 			if (!state.hasOnboarded && state.trips.length === 0) state.loadSample();
 			else if (!state.activeTripId && state.trips[0]) state.setActiveTrip(state.trips[0].id);
 			setReady(true);
 			state.fetchRates();
-		};
-		if (!persistApi) {
-			finish();
-			return;
 		}
-		const unsub = persistApi.onFinishHydration(finish);
-		persistApi.rehydrate();
-		if (persistApi.hasHydrated()) finish();
-		return unsub;
+		boot();
+		return () => {
+			cancelled = true;
+		};
 	}, []);
 	if (!ready) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 		className: "flex min-h-dvh items-center justify-center bg-background text-foreground",
@@ -352,7 +350,7 @@ function TooltipContent({ className, sideOffset = 6, ...props }) {
 		...props
 	}) });
 }
-var styles_default = "/assets/styles-DhqkQimH.css";
+var styles_default = "/assets/styles-DXz5IxaJ.css";
 var APP_NAME = "Daymark";
 var Route$5 = createRootRoute({
 	head: () => ({
@@ -419,15 +417,15 @@ var Route$5 = createRootRoute({
 		] })]
 	})
 });
-var $$splitComponentImporter$4 = () => import("./routes-BYcBT9OK.mjs");
+var $$splitComponentImporter$4 = () => import("./routes-DAulSnew.mjs");
 var Route$4 = createFileRoute("/")({ component: lazyRouteComponent($$splitComponentImporter$4, "component") });
-var $$splitComponentImporter$3 = () => import("./board-DCj_Azit.mjs");
+var $$splitComponentImporter$3 = () => import("./board-BOcRFbDp.mjs");
 var Route$3 = createFileRoute("/board")({ component: lazyRouteComponent($$splitComponentImporter$3, "component") });
-var $$splitComponentImporter$2 = () => import("./calendar-CUtm8siN.mjs");
+var $$splitComponentImporter$2 = () => import("./calendar-9neVei20.mjs");
 var Route$2 = createFileRoute("/calendar")({ component: lazyRouteComponent($$splitComponentImporter$2, "component") });
-var $$splitComponentImporter$1 = () => import("./items-C08WG528.mjs");
+var $$splitComponentImporter$1 = () => import("./items-1q78cgQX.mjs");
 var Route$1 = createFileRoute("/items")({ component: lazyRouteComponent($$splitComponentImporter$1, "component") });
-var $$splitComponentImporter = () => import("./list-BzqSB9qG.mjs");
+var $$splitComponentImporter = () => import("./list-DfbPHonw.mjs");
 var Route = createFileRoute("/list")({ component: lazyRouteComponent($$splitComponentImporter, "component") });
 var rootRouteChildren = {
 	IndexRoute: Route$4.update({

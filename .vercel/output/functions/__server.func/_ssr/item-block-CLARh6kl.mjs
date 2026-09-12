@@ -1,10 +1,10 @@
-import { n as cn } from "./utils-BbOUFaVl.mjs";
+import { n as cn } from "./utils-DUQlNDci.mjs";
 import { s as require_jsx_runtime } from "../_libs/@radix-ui/react-collection+[...].mjs";
 import { i as Trash2, s as Pencil } from "../_libs/lucide-react.mjs";
-import { r as Button } from "./app-shell-BOnkccWv.mjs";
-import { n as KindIcon, r as PricePair, t as KindBadge } from "./price-pair-CulmgezZ.mjs";
+import { r as Button } from "./app-shell-CYN2PeM-.mjs";
+import { n as KindIcon, r as PricePair, t as KindBadge } from "./price-pair-npG-i1ov.mjs";
 import { a as format, n as parseISO } from "../_libs/date-fns.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/item-block-D70KHqTY.js
+//#region node_modules/.nitro/vite/services/ssr/assets/item-block-CLARh6kl.js
 var import_jsx_runtime = require_jsx_runtime();
 function ItemBlock({ item, location, localCurrency, homeCurrency, localPerHome, onUpdate, onEdit, onDelete, dense }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("article", {
