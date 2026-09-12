@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Daymark",
+      "hasCanvas": false,
+      "bodyTextLen": 501,
+      "bodyTextHash": "390d2a6b1df4c84289b75f6886a6ccf99327ebd16d617ec41f727a6fb4f8fa83",
+      "bodyTextPrefix": "Daymark Kyoto in April USD CURRENT TRIP Kyoto in April 12 Apr – ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Daymark",
+      "hasCanvas": false,
+      "bodyTextLen": 532,
+      "bodyTextHash": "e7579203b465878a99cfecd8839de96d0a6d1aa8bf4096aa40415c7f299d20ac",
+      "bodyTextPrefix": "Daymark Kyoto in April USD CURRENT TRIP Kyoto in April 12 Apr – ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}
