@@ -1,0 +1,22 @@
+{
+  "name": "Daymark Itinerary",
+  "short_name": "Daymark",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d0d0d",
+  "theme_color": "#0d0d0d",
+  "description": "Daymark is a travel planning app that helps you create and organize your itineraries.",
+  "icons": [
+    {
+      "src": "/icons/daymark-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/daymark-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
