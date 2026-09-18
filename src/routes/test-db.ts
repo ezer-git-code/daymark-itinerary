@@ -1,10 +1,9 @@
-import { createRoute } from "@tanstack/start";
+import { createFileRoute } from "@tanstack/react-router";
 import { sql } from "../../server/db";
 
-export const Route = createRoute({
-  path: "/test-db",
-  async get() {
+export const Route = createFileRoute("/test-db")({
+  async loader() {
     const result = await sql`SELECT NOW()`;
-    return Response.json(result.rows);
+    return result.rows;
   },
 });
