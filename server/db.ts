@@ -1,7 +1,11 @@
 import { createClient } from "@vercel/postgres";
 
-export const client = createClient({
-  connectionString: process.env.DATABASE_URL,
-});
+const connectionString = process.env.DATABASE_URL;
+
+if (!connectionString) {
+  throw new Error("DATABASE_URL is not set in environment variables");
+}
+
+export const client = createClient({ connectionString });
 
 export const sql = client.sql;
