@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/start";
+import { createFileRoute } from "@tanstack/react-router";
 import { sql } from "../../server/db";
 
 export const Route = createFileRoute("/test-db")({
