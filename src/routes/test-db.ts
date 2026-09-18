@@ -7,3 +7,5 @@ export const Route = createFileRoute("/test-db")({
     return result.rows;
   },
 });
+
+// This file is a test route to verify that the database connection is working correctly. It executes a simple SQL query to get the current timestamp from the database and returns the result as JSON.
