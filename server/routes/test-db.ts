@@ -1,6 +1,10 @@
+import { createRoute } from "@tanstack/start";
 import { sql } from "../db";
 
-export async function GET() {
-  const result = await sql`SELECT NOW()`;
-  return Response.json(result.rows);
-}
+export const Route = createRoute({
+  path: "/test-db",
+  async get() {
+    const result = await sql`SELECT NOW()`;
+    return Response.json(result.rows);
+  },
+});
