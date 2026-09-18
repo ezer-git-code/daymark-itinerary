@@ -1,5 +1,5 @@
 import { createRoute } from "@tanstack/start";
-import { sql } from "../db";
+import { sql } from "../../server/db";
 
 export const Route = createRoute({
   path: "/test-db",
