@@ -24,6 +24,7 @@ import {
   renderInstallPageHtml,
   renderWebManifest,
 } from "../../scripts/grok-pwa-shared.mjs";
+import { sql } from "node_modules/kysely/dist/esm/raw-builder/sql";
 
 interface GrokPwaEvent {
   url: URL;
