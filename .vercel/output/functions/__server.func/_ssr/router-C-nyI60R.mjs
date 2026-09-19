@@ -6,7 +6,7 @@ import { s as require_jsx_runtime } from "../_libs/@radix-ui/react-collection+[.
 import { r as TriangleAlert } from "../_libs/lucide-react.mjs";
 import { a as union, i as string, n as number, r as object, t as literal } from "../_libs/zod.mjs";
 import { a as Trigger, i as Root3, n as Portal, r as Provider, t as Content2 } from "../_libs/radix-ui__react-tooltip.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-CsKf8f5P.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-C-nyI60R.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var __defProp = Object.defineProperty;
@@ -350,8 +350,8 @@ function TooltipContent({ className, sideOffset = 6, ...props }) {
 		...props
 	}) });
 }
-var styles_default = "/assets/styles-DRVc2y9b.css";
-var Route$5 = createRootRoute({
+var styles_default = "/assets/styles-hz5tezYO.css";
+var Route$6 = createRootRoute({
 	head: () => ({
 		meta: [
 			{ charSet: "utf-8" },
@@ -416,44 +416,51 @@ var Route$5 = createRootRoute({
 		] })]
 	})
 });
-var $$splitComponentImporter$4 = () => import("./routes-nSlsN9zH.mjs");
-var Route$4 = createFileRoute("/")({ component: lazyRouteComponent($$splitComponentImporter$4, "component") });
-var $$splitComponentImporter$3 = () => import("./board-CmKdnlZF.mjs");
-var Route$3 = createFileRoute("/board")({ component: lazyRouteComponent($$splitComponentImporter$3, "component") });
-var $$splitComponentImporter$2 = () => import("./calendar-CUXwTWvc.mjs");
-var Route$2 = createFileRoute("/calendar")({ component: lazyRouteComponent($$splitComponentImporter$2, "component") });
-var $$splitComponentImporter$1 = () => import("./items-DadanLRk.mjs");
-var Route$1 = createFileRoute("/items")({ component: lazyRouteComponent($$splitComponentImporter$1, "component") });
-var $$splitComponentImporter = () => import("./list-BxcLv2NI.mjs");
+var $$splitComponentImporter$5 = () => import("./routes-DC_mLgSp.mjs");
+var Route$5 = createFileRoute("/")({ component: lazyRouteComponent($$splitComponentImporter$5, "component") });
+var $$splitComponentImporter$4 = () => import("./board-KRPu-azV.mjs");
+var Route$4 = createFileRoute("/board")({ component: lazyRouteComponent($$splitComponentImporter$4, "component") });
+var $$splitComponentImporter$3 = () => import("./calendar-gePvIvHQ.mjs");
+var Route$3 = createFileRoute("/calendar")({ component: lazyRouteComponent($$splitComponentImporter$3, "component") });
+var $$splitComponentImporter$2 = () => import("./items-BpaSCunC.mjs");
+var Route$2 = createFileRoute("/items")({ component: lazyRouteComponent($$splitComponentImporter$2, "component") });
+var $$splitComponentImporter$1 = () => import("./journal-CgaQ75hJ.mjs");
+var Route$1 = createFileRoute("/journal")({ component: lazyRouteComponent($$splitComponentImporter$1, "component") });
+var $$splitComponentImporter = () => import("./list-DExGfcJB.mjs");
 var Route = createFileRoute("/list")({ component: lazyRouteComponent($$splitComponentImporter, "component") });
 var rootRouteChildren = {
-	IndexRoute: Route$4.update({
+	IndexRoute: Route$5.update({
 		id: "/",
 		path: "/",
-		getParentRoute: () => Route$5
+		getParentRoute: () => Route$6
 	}),
-	BoardRoute: Route$3.update({
+	BoardRoute: Route$4.update({
 		id: "/board",
 		path: "/board",
-		getParentRoute: () => Route$5
+		getParentRoute: () => Route$6
 	}),
-	CalendarRoute: Route$2.update({
+	CalendarRoute: Route$3.update({
 		id: "/calendar",
 		path: "/calendar",
-		getParentRoute: () => Route$5
+		getParentRoute: () => Route$6
 	}),
-	ItemsRoute: Route$1.update({
+	ItemsRoute: Route$2.update({
 		id: "/items",
 		path: "/items",
-		getParentRoute: () => Route$5
+		getParentRoute: () => Route$6
+	}),
+	JournalRoute: Route$1.update({
+		id: "/journal",
+		path: "/journal",
+		getParentRoute: () => Route$6
 	}),
 	ListRoute: Route.update({
 		id: "/list",
 		path: "/list",
-		getParentRoute: () => Route$5
+		getParentRoute: () => Route$6
 	})
 };
-var routeTree = Route$5._addFileChildren(rootRouteChildren)._addFileTypes();
+var routeTree = Route$6._addFileChildren(rootRouteChildren)._addFileTypes();
 var router_exports = /* @__PURE__ */ __exportAll({ getRouter: () => getRouter });
 function getRouter() {
 	return createRouter({

@@ -3,10 +3,10 @@ import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
 import { i as formatRate, n as cn, u as useAppStore } from "./utils-BeLqfDNh.mjs";
 import { v as Link } from "../_libs/@tanstack/react-router+[...].mjs";
 import { s as require_jsx_runtime } from "../_libs/@radix-ui/react-collection+[...].mjs";
-import { c as MapPin, l as List, m as ClipboardList, o as Plus, p as Columns3, s as Pencil, y as CalendarDays } from "../_libs/lucide-react.mjs";
-import { f as useTripWorkspace, i as EmptyTrip, l as TripDialog, n as BudgetLedger, r as Button, t as AppShell } from "./app-shell-BRPgqMb6.mjs";
+import { b as BookOpen, c as MapPin, l as List, m as ClipboardList, o as Plus, p as Columns3, s as Pencil, y as CalendarDays } from "../_libs/lucide-react.mjs";
+import { f as useTripWorkspace, i as EmptyTrip, l as TripDialog, n as BudgetLedger, r as Button, t as AppShell } from "./app-shell-D1QgtqZa.mjs";
 import { a as format, n as parseISO } from "../_libs/date-fns.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-nSlsN9zH.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-DC_mLgSp.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var VIEWS = [
@@ -33,6 +33,12 @@ var VIEWS = [
 		title: "Item list",
 		copy: "A flat ledger of every line, filterable by type.",
 		icon: ClipboardList
+	},
+	{
+		to: "/journal",
+		title: "Journal",
+		copy: "Notes and photos attached to the moments in your trip.",
+		icon: BookOpen
 	}
 ];
 function Home() {

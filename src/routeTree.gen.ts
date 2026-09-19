@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BoardRouteImport } from './routes/board'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as ItemsRouteImport } from './routes/items'
+import { Route as JournalRouteImport } from './routes/journal'
 import { Route as ListRouteImport } from './routes/list'
 
 const IndexRoute = IndexRouteImport.update({
@@ -35,6 +36,11 @@ const ItemsRoute = ItemsRouteImport.update({
   path: '/items',
   getParentRoute: () => rootRouteImport,
 } as any)
+const JournalRoute = JournalRouteImport.update({
+  id: '/journal',
+  path: '/journal',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ListRoute = ListRouteImport.update({
   id: '/list',
   path: '/list',
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/board': typeof BoardRoute
   '/calendar': typeof CalendarRoute
   '/items': typeof ItemsRoute
+  '/journal': typeof JournalRoute
   '/list': typeof ListRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/board': typeof BoardRoute
   '/calendar': typeof CalendarRoute
   '/items': typeof ItemsRoute
+  '/journal': typeof JournalRoute
   '/list': typeof ListRoute
 }
 export interface FileRoutesById {
@@ -61,14 +69,16 @@ export interface FileRoutesById {
   '/board': typeof BoardRoute
   '/calendar': typeof CalendarRoute
   '/items': typeof ItemsRoute
+  '/journal': typeof JournalRoute
   '/list': typeof ListRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/board' | '/calendar' | '/items' | '/list'
+  fullPaths: '/' | '/board' | '/calendar' | '/items' | '/journal' | '/list'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/board' | '/calendar' | '/items' | '/list'
-  id: '__root__' | '/' | '/board' | '/calendar' | '/items' | '/list'
+  to: '/' | '/board' | '/calendar' | '/items' | '/journal' | '/list'
+  id:
+    '__root__' | '/' | '/board' | '/calendar' | '/items' | '/journal' | '/list'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,6 +86,7 @@ export interface RootRouteChildren {
   BoardRoute: typeof BoardRoute
   CalendarRoute: typeof CalendarRoute
   ItemsRoute: typeof ItemsRoute
+  JournalRoute: typeof JournalRoute
   ListRoute: typeof ListRoute
 }
 
@@ -109,6 +120,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ItemsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/journal': {
+      id: '/journal'
+      path: '/journal'
+      fullPath: '/journal'
+      preLoaderRoute: typeof JournalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/list': {
       id: '/list'
       path: '/list'
@@ -124,6 +142,7 @@ const rootRouteChildren: RootRouteChildren = {
   BoardRoute: BoardRoute,
   CalendarRoute: CalendarRoute,
   ItemsRoute: ItemsRoute,
+  JournalRoute: JournalRoute,
   ListRoute: ListRoute,
 }
 export const routeTree = rootRouteImport

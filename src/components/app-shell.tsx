@@ -4,6 +4,7 @@ import {
   ChevronDown,
   ClipboardList,
   Columns3,
+  BookOpen,
   List,
   Plus,
   House,
@@ -43,6 +44,7 @@ const NAV = [
   { to: "/calendar", label: "Calendar", icon: CalendarDays },
   { to: "/board", label: "Board", icon: Columns3 },
   { to: "/items", label: "Items", icon: ClipboardList },
+  { to: "/journal", label: "Journal", icon: BookOpen },
 ] as const;
 
 export function AppShell({
@@ -80,23 +82,25 @@ export function AppShell({
           >
             Daymark
           </Link>
-          <nav className="ml-4 hidden items-center gap-1 sm:flex" aria-label="Views">
-            {NAV.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                className={cn(
-                  "flex h-9 items-center rounded-sm px-3 text-sm font-medium transition-colors duration-150",
-                  pathname === item.to
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:bg-accent hover:text-foreground",
-                )}
-                aria-current={pathname === item.to ? "page" : undefined}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+          {pathname !== "/" && (
+            <nav className="ml-4 hidden items-center gap-1 sm:flex" aria-label="Views">
+              {NAV.map((item) => (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className={cn(
+                    "flex h-9 items-center rounded-sm px-3 text-sm font-medium transition-colors duration-150",
+                    pathname === item.to
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:bg-accent hover:text-foreground",
+                  )}
+                  aria-current={pathname === item.to ? "page" : undefined}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          )}
           <div className="ml-auto flex items-center gap-2">
             {trips.length > 0 && (
               <DropdownMenu>
@@ -185,35 +189,37 @@ export function AppShell({
         {children}
       </main>
 
-      <nav
-        className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-background/95 pb-[env(safe-area-inset-bottom)] sm:hidden"
-        aria-label="Views"
-      >
-        <ul className="grid grid-cols-5">
-          <li>
-            <Link
-              to="/"
-              className={navCls(pathname === "/")}
-              aria-current={pathname === "/" ? "page" : undefined}
-            >
-              <House className="size-5" />
-              Home
-            </Link>
-          </li>
-          {NAV.map((item) => (
-            <li key={item.to}>
+      {pathname !== "/" && (
+        <nav
+          className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-background/95 pb-[env(safe-area-inset-bottom)] sm:hidden"
+          aria-label="Views"
+        >
+          <ul className="grid grid-cols-6">
+            <li>
               <Link
-                to={item.to}
-                className={navCls(pathname === item.to)}
-                aria-current={pathname === item.to ? "page" : undefined}
+                to="/"
+                className={navCls(pathname === "/")}
+                aria-current={pathname === "/" ? "page" : undefined}
               >
-                <item.icon className="size-5" />
-                {item.label}
+                <House className="size-5" />
+                Home
               </Link>
             </li>
-          ))}
-        </ul>
-      </nav>
+            {NAV.map((item) => (
+              <li key={item.to}>
+                <Link
+                  to={item.to}
+                  className={navCls(pathname === item.to)}
+                  aria-current={pathname === item.to ? "page" : undefined}
+                >
+                  <item.icon className="size-5" />
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
 
       <TripDialog
         open={tripOpen}

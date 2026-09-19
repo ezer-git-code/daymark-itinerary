@@ -4,6 +4,7 @@ import {
   CalendarDays,
   ClipboardList,
   Columns3,
+  BookOpen,
   List,
   MapPin,
   Pencil,
@@ -44,6 +45,12 @@ const VIEWS = [
     title: "Item list",
     copy: "A flat ledger of every line, filterable by type.",
     icon: ClipboardList,
+  },
+  {
+    to: "/journal" as const,
+    title: "Journal",
+    copy: "Notes and photos attached to the moments in your trip.",
+    icon: BookOpen,
   },
 ];
 

@@ -2,10 +2,10 @@ import { i as __toESM } from "../_runtime.mjs";
 import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
 import { s as require_jsx_runtime } from "../_libs/@radix-ui/react-collection+[...].mjs";
 import { o as Plus } from "../_libs/lucide-react.mjs";
-import { a as ITEM_KINDS, d as ViewToolbar, f as useTripWorkspace, i as EmptyTrip, r as Button, t as AppShell, u as TripEditors } from "./app-shell-BRPgqMb6.mjs";
-import { r as PricePair, t as KindBadge } from "./price-pair-EpFsqLQK.mjs";
+import { a as ITEM_KINDS, d as ViewToolbar, f as useTripWorkspace, i as EmptyTrip, r as Button, t as AppShell, u as TripEditors } from "./app-shell-D1QgtqZa.mjs";
+import { r as PricePair, t as KindBadge } from "./price-pair-iLKOT0vW.mjs";
 import { a as format, n as parseISO } from "../_libs/date-fns.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/board-CmKdnlZF.js
+//#region node_modules/.nitro/vite/services/ssr/assets/board-KRPu-azV.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function BoardPage() {

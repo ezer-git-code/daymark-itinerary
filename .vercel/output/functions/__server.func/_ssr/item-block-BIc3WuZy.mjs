@@ -1,12 +1,14 @@
 import { n as cn } from "./utils-BeLqfDNh.mjs";
 import { s as require_jsx_runtime } from "../_libs/@radix-ui/react-collection+[...].mjs";
 import { i as Trash2, s as Pencil, u as Image } from "../_libs/lucide-react.mjs";
-import { r as Button } from "./app-shell-BRPgqMb6.mjs";
-import { n as KindIcon, r as PricePair, t as KindBadge } from "./price-pair-EpFsqLQK.mjs";
+import { r as Button } from "./app-shell-D1QgtqZa.mjs";
+import { n as KindIcon, r as PricePair, t as KindBadge } from "./price-pair-iLKOT0vW.mjs";
 import { a as format, n as parseISO } from "../_libs/date-fns.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/item-block-DhSlG79m.js
+//#region node_modules/.nitro/vite/services/ssr/assets/item-block-BIc3WuZy.js
 var import_jsx_runtime = require_jsx_runtime();
 function ItemBlock({ item, location, localCurrency, homeCurrency, localPerHome, onUpdate, onEdit, onDelete, dense }) {
+	const notes = item.notes ?? "";
+	const images = Array.isArray(item.images) ? item.images : [];
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("article", {
 		className: cn("rounded-lg bg-background/60 p-4", dense && "p-3"),
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -67,22 +69,22 @@ function ItemBlock({ item, location, localCurrency, homeCurrency, localPerHome, 
 							compact: dense
 						})
 					}),
-					(item.notes || item.images.length > 0) && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					(notes || images.length > 0) && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "mt-3 rounded-md border border-border/70 bg-muted/20 p-3",
 						children: [
-							item.notes && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							notes && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 								className: "whitespace-pre-wrap text-sm text-foreground/90",
-								children: item.notes
+								children: notes
 							}),
-							item.images.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							images.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 								className: "mt-3 grid gap-2 sm:grid-cols-2",
-								children: item.images.map((image, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+								children: images.map((image, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
 									src: image,
 									alt: `${item.title} journal ${index + 1}`,
 									className: "h-32 w-full rounded-md object-cover border border-border"
 								}, `${item.id}-image-${index}`))
 							}),
-							item.images.length > 0 && !item.notes && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							images.length > 0 && !notes && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 								className: "mt-2 flex items-center gap-1 text-[11px] text-muted-foreground",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Image, { className: "size-3.5" }), "Photo notes"]
 							})

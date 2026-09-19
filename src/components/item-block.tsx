@@ -27,6 +27,9 @@ export function ItemBlock({
   onDelete: () => void;
   dense?: boolean;
 }) {
+  const notes = item.notes ?? "";
+  const images = Array.isArray(item.images) ? item.images : [];
+
   return (
     <article
       className={cn(
@@ -83,16 +86,16 @@ export function ItemBlock({
               compact={dense}
             />
           </div>
-          {(item.notes || item.images.length > 0) && (
+          {(notes || images.length > 0) && (
             <div className="mt-3 rounded-md border border-border/70 bg-muted/20 p-3">
-              {item.notes && (
+              {notes && (
                 <p className="whitespace-pre-wrap text-sm text-foreground/90">
-                  {item.notes}
+                  {notes}
                 </p>
               )}
-              {item.images.length > 0 && (
+              {images.length > 0 && (
                 <div className="mt-3 grid gap-2 sm:grid-cols-2">
-                  {item.images.map((image, index) => (
+                  {images.map((image, index) => (
                     <img
                       key={`${item.id}-image-${index}`}
                       src={image}
@@ -102,7 +105,7 @@ export function ItemBlock({
                   ))}
                 </div>
               )}
-              {item.images.length > 0 && !item.notes && (
+              {images.length > 0 && !notes && (
                 <div className="mt-2 flex items-center gap-1 text-[11px] text-muted-foreground">
                   <ImageIcon className="size-3.5" />
                   Photo notes

@@ -4,12 +4,12 @@ import { t as cva } from "../_libs/class-variance-authority+clsx.mjs";
 import { a as localPerHomeForTrip, c as sumHome, d as useTripItems, f as useTripLocations, i as formatRate, l as useActiveTrip, n as cn, r as formatMoney, t as CURRENCIES, u as useAppStore } from "./utils-BeLqfDNh.mjs";
 import { d as useRouterState, v as Link } from "../_libs/@tanstack/react-router+[...].mjs";
 import { r as Slot, s as require_jsx_runtime } from "../_libs/@radix-ui/react-collection+[...].mjs";
-import { _ as ChevronDown, d as House, l as List, m as ClipboardList, o as Plus, p as Columns3, t as X, v as Check, y as CalendarDays } from "../_libs/lucide-react.mjs";
+import { _ as ChevronDown, b as BookOpen, d as House, l as List, m as ClipboardList, o as Plus, p as Columns3, t as X, v as Check, y as CalendarDays } from "../_libs/lucide-react.mjs";
 import { a as DialogOverlay$1, i as DialogDescription$1, n as DialogClose, o as DialogPortal$1, r as DialogContent$1, s as DialogTitle$1, t as Dialog$1 } from "../_libs/@radix-ui/react-dialog+[...].mjs";
 import { t as Root } from "../_libs/radix-ui__react-label.mjs";
 import { a as Root2, i as Portal2, n as Item2, o as Separator2, r as Label2, s as Trigger, t as Content2 } from "../_libs/@radix-ui/react-dropdown-menu+[...].mjs";
 import { a as SelectItemIndicator, c as SelectTrigger$1, i as SelectItem$1, l as SelectValue$1, n as SelectContent$1, o as SelectItemText, r as SelectIcon, s as SelectPortal, t as Select$1, u as SelectViewport } from "../_libs/@radix-ui/react-select+[...].mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/app-shell-BRPgqMb6.js
+//#region node_modules/.nitro/vite/services/ssr/assets/app-shell-D1QgtqZa.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function BudgetLedger({ budget, estimated, actual, homeCurrency }) {
@@ -627,6 +627,11 @@ var NAV = [
 		to: "/items",
 		label: "Items",
 		icon: ClipboardList
+	},
+	{
+		to: "/journal",
+		label: "Journal",
+		icon: BookOpen
 	}
 ];
 function AppShell({ children, title, actions }) {
@@ -661,7 +666,7 @@ function AppShell({ children, title, actions }) {
 							className: "font-display text-xl tracking-tight text-foreground",
 							children: "Daymark"
 						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
+						pathname !== "/" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
 							className: "ml-4 hidden items-center gap-1 sm:flex",
 							"aria-label": "Views",
 							children: NAV.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
@@ -751,11 +756,11 @@ function AppShell({ children, title, actions }) {
 					})]
 				}), children]
 			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
+			pathname !== "/" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
 				className: "fixed inset-x-0 bottom-0 z-30 border-t border-border bg-background/95 pb-[env(safe-area-inset-bottom)] sm:hidden",
 				"aria-label": "Views",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("ul", {
-					className: "grid grid-cols-5",
+					className: "grid grid-cols-6",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
 						to: "/",
 						className: navCls(pathname === "/"),

@@ -82,6 +82,19 @@ var createLucideIcon = (iconName, iconNode) => {
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
+var BookOpen = createLucideIcon("book-open", [["path", {
+	d: "M12 7v14",
+	key: "1akyts"
+}], ["path", {
+	d: "M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z",
+	key: "ruj8y"
+}]]);
+/**
+* @license lucide-react v0.510.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
 var CalendarDays = createLucideIcon("calendar-days", [
 	["path", {
 		d: "M8 2v4",
@@ -465,4 +478,4 @@ var X = createLucideIcon("x", [["path", {
 	key: "d8bk6v"
 }]]);
 //#endregion
-export { ChevronDown as _, ShoppingBag as a, MapPin as c, House as d, Compass as f, ChevronLeft as g, ChevronRight as h, Trash2 as i, List as l, ClipboardList as m, Utensils as n, Plus as o, Columns3 as p, TriangleAlert as r, Pencil as s, X as t, Image as u, Check as v, CalendarDays as y };
+export { ChevronDown as _, ShoppingBag as a, BookOpen as b, MapPin as c, House as d, Compass as f, ChevronLeft as g, ChevronRight as h, Trash2 as i, List as l, ClipboardList as m, Utensils as n, Plus as o, Columns3 as p, TriangleAlert as r, Pencil as s, X as t, Image as u, Check as v, CalendarDays as y };
