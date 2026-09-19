@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { format, parseISO } from "date-fns";
 import { BookOpen, Image as ImageIcon, Pencil } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AppShell,
   EmptyTrip,
@@ -12,15 +12,33 @@ import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/journal")({ component: JournalPage });
 
+type StoredJournalEntry = {
+  id?: string;
+  itinerary_item_id?: string;
+  title?: string;
+  content?: string;
+  notes?: string;
+  image_urls?: string[];
+  images?: string[];
+  day?: string;
+  location?: string;
+};
+
 function JournalPage() {
   const w = useTripWorkspace();
   const [itemOpen, setItemOpen] = useState(false);
   const [editingItemId, setEditingItemId] = useState<string | null>(null);
-  const entries = w.items.filter((item) => {
-    const notes = item.notes ?? "";
-    const images = Array.isArray(item.images) ? item.images : [];
-    return notes.trim() !== "" || images.length > 0;
-  });
+  const [state, setState] = useState<StoredJournalEntry[]>([]);
+
+  useEffect(() => {
+    const data = localStorage.getItem("daymark_journal");
+    try {
+      const parsed = JSON.parse(data ?? "[]");
+      setState(Array.isArray(parsed) ? parsed : []);
+    } catch {
+      setState([]);
+    }
+  }, []);
 
   function editItem(id: string) {
     setEditingItemId(id);
@@ -31,7 +49,7 @@ function JournalPage() {
     <AppShell title="Journal">
       {!w.trip ? (
         <EmptyTrip />
-      ) : entries.length === 0 ? (
+      ) : state.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-xl bg-card px-6 py-16 text-center shadow-card">
           <BookOpen className="size-8 text-primary" />
           <p className="mt-4 font-display text-2xl">Your journal is empty</p>
@@ -41,31 +59,45 @@ function JournalPage() {
         </div>
       ) : (
         <div className="grid gap-4 md:grid-cols-2">
-          {entries.map((item) => {
-            const notes = item.notes ?? "";
-            const images = Array.isArray(item.images) ? item.images : [];
-            const location = w.locations.find((entry) => entry.id === item.locationId);
+          {state.map((entry, index) => {
+            const notes = entry.notes ?? entry.content ?? "";
+            const images = Array.isArray(entry.images)
+              ? entry.images
+              : Array.isArray(entry.image_urls)
+                ? entry.image_urls
+                : [];
+            const item = w.items.find(
+              (candidate) => candidate.id === entry.itinerary_item_id,
+            );
+            const title = entry.title ?? item?.title ?? "Journal entry";
+            const location = entry.location ?? "";
+            const day = entry.day ?? item?.date;
             return (
-              <article key={item.id} className="rounded-xl bg-card p-5 shadow-card">
+              <article
+                key={entry.id ?? `${entry.itinerary_item_id ?? "entry"}-${index}`}
+                className="rounded-xl bg-card p-5 shadow-card"
+              >
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="text-xs tracking-wide text-muted-foreground uppercase">
-                      {format(parseISO(item.date), "EEE d MMM yyyy")}
-                      {location ? ` · ${location.name}` : ""}
+                      {day ? format(parseISO(day), "EEE d MMM yyyy") : "Journal"}
+                      {location ? ` · ${location}` : ""}
                     </p>
                     <h2 className="mt-1 font-display text-2xl font-medium tracking-tight">
-                      {item.title}
+                      {title}
                     </h2>
                   </div>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon-sm"
-                    aria-label={`Edit journal entry for ${item.title}`}
-                    onClick={() => editItem(item.id)}
-                  >
-                    <Pencil />
-                  </Button>
+                  {item && (
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon-sm"
+                      aria-label={`Edit journal entry for ${title}`}
+                      onClick={() => editItem(item.id)}
+                    >
+                      <Pencil />
+                    </Button>
+                  )}
                 </div>
                 {notes && (
                   <p className="mt-4 whitespace-pre-wrap text-sm leading-6 text-foreground/90">
@@ -76,9 +108,9 @@ function JournalPage() {
                   <div className="mt-4 grid grid-cols-2 gap-2">
                     {images.map((image, index) => (
                       <img
-                        key={`${item.id}-image-${index}`}
+                        key={`${entry.id ?? index}-image-${index}`}
                         src={image}
-                        alt={`${item.title} journal photo ${index + 1}`}
+                        alt={`${title} journal photo ${index + 1}`}
                         className="aspect-[4/3] w-full rounded-md border border-border object-cover"
                       />
                     ))}

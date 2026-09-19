@@ -2,9 +2,9 @@ import { n as cn } from "./utils-BeLqfDNh.mjs";
 import { s as require_jsx_runtime } from "../_libs/@radix-ui/react-collection+[...].mjs";
 import { i as Trash2, s as Pencil, u as Image } from "../_libs/lucide-react.mjs";
 import { r as Button } from "./app-shell-D1QgtqZa.mjs";
-import { n as KindIcon, r as PricePair, t as KindBadge } from "./price-pair-iLKOT0vW.mjs";
+import { n as KindIcon, r as PricePair, t as KindBadge } from "./price-pair-ByA9JkvS.mjs";
 import { a as format, n as parseISO } from "../_libs/date-fns.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/item-block-BIc3WuZy.js
+//#region node_modules/.nitro/vite/services/ssr/assets/item-block-Cc22OBp_.js
 var import_jsx_runtime = require_jsx_runtime();
 function ItemBlock({ item, location, localCurrency, homeCurrency, localPerHome, onUpdate, onEdit, onDelete, dense }) {
 	const notes = item.notes ?? "";

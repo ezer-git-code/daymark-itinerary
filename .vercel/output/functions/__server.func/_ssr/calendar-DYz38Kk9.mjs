@@ -4,10 +4,10 @@ import { n as cn } from "./utils-BeLqfDNh.mjs";
 import { s as require_jsx_runtime } from "../_libs/@radix-ui/react-collection+[...].mjs";
 import { g as ChevronLeft, h as ChevronRight } from "../_libs/lucide-react.mjs";
 import { d as ViewToolbar, f as useTripWorkspace, i as EmptyTrip, r as Button, t as AppShell, u as TripEditors } from "./app-shell-D1QgtqZa.mjs";
-import { n as KindIcon } from "./price-pair-iLKOT0vW.mjs";
+import { n as KindIcon } from "./price-pair-ByA9JkvS.mjs";
 import { a as format, c as eachDayOfInterval, d as startOfWeek, f as addMonths, i as isSameMonth, l as endOfMonth, n as parseISO, o as endOfWeek, r as isWithinInterval, s as startOfMonth, t as subMonths, u as isSameDay } from "../_libs/date-fns.mjs";
-import { t as ItemBlock } from "./item-block-BIc3WuZy.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/calendar-gePvIvHQ.js
+import { t as ItemBlock } from "./item-block-Cc22OBp_.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/calendar-DYz38Kk9.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function CalendarPage() {

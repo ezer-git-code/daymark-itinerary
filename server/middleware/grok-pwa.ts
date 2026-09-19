@@ -24,7 +24,6 @@ import {
   renderInstallPageHtml,
   renderWebManifest,
 } from "../../scripts/grok-pwa-shared.mjs";
-import { sql } from "node_modules/kysely/dist/esm/raw-builder/sql";
 
 interface GrokPwaEvent {
   url: URL;
@@ -69,32 +68,7 @@ export default async function grokPwaMiddleware(
   const path = event.url.pathname;
   const urlWithQuery = path + event.url.search;
 
-  // ⭐ Legacy journal route (kept as a compatibility shim; the app stores notes on each trip item).
-  if (path === "/api/journal/create") {
-    if (method !== "POST") return next();
-    try {
-      const body = await (
-        event.req as unknown as { json: () => Promise<Record<string, unknown>> }
-      ).json();
-      const { itinerary_item_id, content, image_urls, day, location } = body;
-      const result = (await sql`
-        INSERT INTO journal_entries (itinerary_item_id, content, image_urls, day, location)
-        VALUES (${itinerary_item_id}, ${content}, ${image_urls}, ${day}, ${location})
-        RETURNING *;
-      `) as { rows?: unknown[] };
-
-      return new Response(JSON.stringify((result.rows ?? [])[0] ?? {}), {
-        headers: { "content-type": "application/json" },
-      });
-    } catch (err) {
-      console.error("journal route error:", err);
-      return new Response("Journal save failed", { status: 500 });
-    }
-  }
-
   if (method !== "GET") return next();
-
-  // ⭐ (We will add the "get entries" endpoint next)
 
   if (path === "/__grok/manifest.webmanifest" || path === "/__grok/manifest.json") {
     return new Response(renderWebManifest(requestHost(event)), {

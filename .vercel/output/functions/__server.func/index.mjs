@@ -1,6 +1,5 @@
 globalThis.__nitro_main__ = import.meta.url;
 import { i as toEventHandler, n as HTTPError, o as NodeResponse, r as defineLazyEventHandler, t as H3Core } from "./_libs/h3+rou3+srvx.mjs";
-import { t as sql } from "./_libs/kysely.mjs";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 //#region node_modules/nitro/dist/runtime/internal/route-rules.mjs
@@ -419,21 +418,6 @@ async function grokPwaMiddleware(event, next) {
 	const method = (event.req.method ?? "GET").toUpperCase();
 	const path = event.url.pathname;
 	const urlWithQuery = path + event.url.search;
-	if (path === "/api/journal/create") {
-		if (method !== "POST") return next();
-		try {
-			const { itinerary_item_id, content, image_urls, day, location } = await event.req.json();
-			const result = await sql`
-        INSERT INTO journal_entries (itinerary_item_id, content, image_urls, day, location)
-        VALUES (${itinerary_item_id}, ${content}, ${image_urls}, ${day}, ${location})
-        RETURNING *;
-      `;
-			return new Response(JSON.stringify((result.rows ?? [])[0] ?? {}), { headers: { "content-type": "application/json" } });
-		} catch (err) {
-			console.error("journal route error:", err);
-			return new Response("Journal save failed", { status: 500 });
-		}
-	}
 	if (method !== "GET") return next();
 	if (path === "/__grok/manifest.webmanifest" || path === "/__grok/manifest.json") return new Response(renderWebManifest(requestHost(event)), { headers: {
 		"content-type": "application/manifest+json; charset=utf-8",
