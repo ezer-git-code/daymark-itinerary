@@ -14,7 +14,6 @@ import { Route as BoardRouteImport } from './routes/board'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as ItemsRouteImport } from './routes/items'
 import { Route as ListRouteImport } from './routes/list'
-import { Route as TestDbRouteImport } from './routes/test-db'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -41,11 +40,6 @@ const ListRoute = ListRouteImport.update({
   path: '/list',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TestDbRoute = TestDbRouteImport.update({
-  id: '/test-db',
-  path: '/test-db',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -53,7 +47,6 @@ export interface FileRoutesByFullPath {
   '/calendar': typeof CalendarRoute
   '/items': typeof ItemsRoute
   '/list': typeof ListRoute
-  '/test-db': typeof TestDbRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -61,7 +54,6 @@ export interface FileRoutesByTo {
   '/calendar': typeof CalendarRoute
   '/items': typeof ItemsRoute
   '/list': typeof ListRoute
-  '/test-db': typeof TestDbRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -70,15 +62,13 @@ export interface FileRoutesById {
   '/calendar': typeof CalendarRoute
   '/items': typeof ItemsRoute
   '/list': typeof ListRoute
-  '/test-db': typeof TestDbRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/board' | '/calendar' | '/items' | '/list' | '/test-db'
+  fullPaths: '/' | '/board' | '/calendar' | '/items' | '/list'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/board' | '/calendar' | '/items' | '/list' | '/test-db'
-  id:
-    '__root__' | '/' | '/board' | '/calendar' | '/items' | '/list' | '/test-db'
+  to: '/' | '/board' | '/calendar' | '/items' | '/list'
+  id: '__root__' | '/' | '/board' | '/calendar' | '/items' | '/list'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -87,7 +77,6 @@ export interface RootRouteChildren {
   CalendarRoute: typeof CalendarRoute
   ItemsRoute: typeof ItemsRoute
   ListRoute: typeof ListRoute
-  TestDbRoute: typeof TestDbRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -127,13 +116,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ListRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/test-db': {
-      id: '/test-db'
-      path: '/test-db'
-      fullPath: '/test-db'
-      preLoaderRoute: typeof TestDbRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -143,7 +125,6 @@ const rootRouteChildren: RootRouteChildren = {
   CalendarRoute: CalendarRoute,
   ItemsRoute: ItemsRoute,
   ListRoute: ListRoute,
-  TestDbRoute: TestDbRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

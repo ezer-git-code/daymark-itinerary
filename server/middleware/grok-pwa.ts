@@ -71,6 +71,25 @@ export default async function grokPwaMiddleware(
   const path = event.url.pathname;
   const urlWithQuery = path + event.url.search;
 
+  // ⭐ Create a journal entry
+  if (path === "/api/journal/create" && method === "POST") {
+    const body = await event.req.json();
+
+    const { itinerary_item_id, content, image_urls, day, location } = body;
+
+    const result = await sql`
+      INSERT INTO journal_entries (itinerary_item_id, content, image_urls, day, location)
+      VALUES (${itinerary_item_id}, ${content}, ${image_urls}, ${day}, ${location})
+      RETURNING *;
+    `;
+
+    return new Response(JSON.stringify(result.rows[0]), {
+      headers: { "content-type": "application/json" },
+    });
+  }
+
+  // ⭐ (We will add the "get entries" endpoint next)
+
   if (path === "/__grok/manifest.webmanifest" || path === "/__grok/manifest.json") {
     return new Response(renderWebManifest(requestHost(event)), {
       headers: {
