@@ -1,5 +1,5 @@
-export default {
-  externals: {
-    inline: ['tslib']
-  }
-};
+import { defineConfig } from 'nitro';
+
+export default defineConfig({
+  noExternals: ['tslib']
+});
