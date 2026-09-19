@@ -1,9 +1,7 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { defineNitroConfig } from 'nitro';
 
-export const Route = createFileRoute('/journal')({
-  component: RouteComponent,
-})
-
-function RouteComponent() {
-  return <div>Hello "/journal"!</div>
-}
+export default defineNitroConfig({
+  externals: {
+    inline: ['tslib', '@radix-ui/react-dialog']
+  }
+});
