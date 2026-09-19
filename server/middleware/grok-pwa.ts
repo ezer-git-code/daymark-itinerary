@@ -66,27 +66,33 @@ export default async function grokPwaMiddleware(
   next: () => unknown | Promise<unknown>,
 ): Promise<unknown> {
   const method = (event.req.method ?? "GET").toUpperCase();
-  if (method !== "GET") return next();
-
   const path = event.url.pathname;
   const urlWithQuery = path + event.url.search;
 
-  // ⭐ Create a journal entry
-  if (path === "/api/journal/create" && method === "POST") {
-    const body = await event.req.json();
+  // ⭐ Legacy journal route (kept as a compatibility shim; the app stores notes on each trip item).
+  if (path === "/api/journal/create") {
+    if (method !== "POST") return next();
+    try {
+      const body = await (
+        event.req as unknown as { json: () => Promise<Record<string, unknown>> }
+      ).json();
+      const { itinerary_item_id, content, image_urls, day, location } = body;
+      const result = (await sql`
+        INSERT INTO journal_entries (itinerary_item_id, content, image_urls, day, location)
+        VALUES (${itinerary_item_id}, ${content}, ${image_urls}, ${day}, ${location})
+        RETURNING *;
+      `) as { rows?: unknown[] };
 
-    const { itinerary_item_id, content, image_urls, day, location } = body;
-
-    const result = await sql`
-      INSERT INTO journal_entries (itinerary_item_id, content, image_urls, day, location)
-      VALUES (${itinerary_item_id}, ${content}, ${image_urls}, ${day}, ${location})
-      RETURNING *;
-    `;
-
-    return new Response(JSON.stringify(result.rows[0]), {
-      headers: { "content-type": "application/json" },
-    });
+      return new Response(JSON.stringify((result.rows ?? [])[0] ?? {}), {
+        headers: { "content-type": "application/json" },
+      });
+    } catch (err) {
+      console.error("journal route error:", err);
+      return new Response("Journal save failed", { status: 500 });
+    }
   }
+
+  if (method !== "GET") return next();
 
   // ⭐ (We will add the "get entries" endpoint next)
 

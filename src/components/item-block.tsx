@@ -1,5 +1,5 @@
 import { format, parseISO } from "date-fns";
-import { Pencil, Trash2 } from "lucide-react";
+import { Image as ImageIcon, Pencil, Trash2 } from "lucide-react";
 import { KindBadge, KindIcon } from "@/components/kind-badge";
 import { PricePair } from "@/components/price-pair";
 import { Button } from "@/components/ui/button";
@@ -83,6 +83,33 @@ export function ItemBlock({
               compact={dense}
             />
           </div>
+          {(item.notes || item.images.length > 0) && (
+            <div className="mt-3 rounded-md border border-border/70 bg-muted/20 p-3">
+              {item.notes && (
+                <p className="whitespace-pre-wrap text-sm text-foreground/90">
+                  {item.notes}
+                </p>
+              )}
+              {item.images.length > 0 && (
+                <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                  {item.images.map((image, index) => (
+                    <img
+                      key={`${item.id}-image-${index}`}
+                      src={image}
+                      alt={`${item.title} journal ${index + 1}`}
+                      className="h-32 w-full rounded-md object-cover border border-border"
+                    />
+                  ))}
+                </div>
+              )}
+              {item.images.length > 0 && !item.notes && (
+                <div className="mt-2 flex items-center gap-1 text-[11px] text-muted-foreground">
+                  <ImageIcon className="size-3.5" />
+                  Photo notes
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </article>

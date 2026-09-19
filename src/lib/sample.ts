@@ -110,6 +110,8 @@ function item(
     kind,
     title,
     date,
+    notes: "",
+    images: [],
     estimatedLocal,
     actualLocal,
   };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -17,7 +17,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import { CURRENCIES } from "@/lib/money";
+import { normalizeJournalData } from "@/lib/journal";
 import type { ItemKind, Location, Trip, TripItem } from "@/lib/types";
 import { ITEM_KINDS } from "@/lib/types";
 
@@ -265,6 +267,8 @@ export function ItemDialog({
     kind: ItemKind;
     title: string;
     date: string;
+    notes: string;
+    images: string[];
   }) => void;
 }) {
   const [title, setTitle] = useState(initial?.title ?? "");
@@ -273,8 +277,27 @@ export function ItemDialog({
     initial?.locationId ?? defaultLocationId ?? locations[0]?.id ?? "",
   );
   const [date, setDate] = useState(initial?.date ?? "");
+  const [notes, setNotes] = useState(initial?.notes ?? "");
+  const [images, setImages] = useState<string[]>(initial?.images ?? []);
 
   const loc = locations.find((l) => l.id === locationId);
+  const imageCount = useMemo(() => images.filter(Boolean).length, [images]);
+
+  function handleImageFiles(fileList: FileList | null) {
+    if (!fileList || fileList.length === 0) return;
+    const next = Array.from(fileList)
+      .filter((file) => file.type.startsWith("image/"))
+      .map((file) => new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result ?? ""));
+        reader.onerror = () => reject(new Error("Could not read image file"));
+        reader.readAsDataURL(file);
+      }));
+
+    void Promise.all(next).then((values) => {
+      setImages((current) => [...current, ...values.filter(Boolean)]);
+    });
+  }
 
   return (
     <Dialog
@@ -285,6 +308,8 @@ export function ItemDialog({
           setKind(initial?.kind ?? defaultKind ?? "experience");
           setLocationId(initial?.locationId ?? defaultLocationId ?? locations[0]?.id ?? "");
           setDate(initial?.date ?? "");
+          setNotes(initial?.notes ?? "");
+          setImages(initial?.images ?? []);
         }
         onOpenChange(v);
       }}
@@ -301,11 +326,14 @@ export function ItemDialog({
           onSubmit={(e) => {
             e.preventDefault();
             if (!locationId) return;
+            const normalized = normalizeJournalData(notes, images);
             onSubmit({
               title: title.trim() || "Untitled",
               kind,
               locationId,
               date: date || loc?.date || new Date().toISOString().slice(0, 10),
+              notes: normalized.notes,
+              images: normalized.images,
             });
             onOpenChange(false);
           }}
@@ -363,6 +391,47 @@ export function ItemDialog({
               required
             />
           </Field>
+          <Field label="Journal notes">
+            <Textarea
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              placeholder="Add a note about this moment, memory, or takeaway..."
+            />
+          </Field>
+          <div className="grid gap-2">
+            <div className="flex items-center justify-between gap-2">
+              <Label>Photos</Label>
+              {imageCount > 0 && (
+                <span className="text-xs text-muted-foreground">{imageCount} added</span>
+              )}
+            </div>
+            <Input
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={(e) => handleImageFiles(e.target.files)}
+            />
+            {images.length > 0 && (
+              <div className="grid gap-2 sm:grid-cols-3">
+                {images.map((image, index) => (
+                  <div key={`${image}-${index}`} className="relative">
+                    <img
+                      src={image}
+                      alt={`Journal preview ${index + 1}`}
+                      className="h-24 w-full rounded-md object-cover border border-border"
+                    />
+                    <button
+                      type="button"
+                      className="absolute -top-2 -right-2 rounded-full bg-destructive px-1.5 py-0.5 text-[10px] text-destructive-foreground"
+                      onClick={() => setImages((current) => current.filter((_, i) => i !== index))}
+                    >
+                      ×
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
               Cancel

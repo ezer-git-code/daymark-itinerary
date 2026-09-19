@@ -27,6 +27,8 @@ export type TripItem = {
   kind: ItemKind;
   title: string;
   date: string;
+  notes: string;
+  images: string[];
   estimatedLocal: number | null;
   actualLocal: number | null;
 };
