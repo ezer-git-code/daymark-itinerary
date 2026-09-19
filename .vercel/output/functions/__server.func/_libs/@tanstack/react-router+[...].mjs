@@ -1,9 +1,48 @@
 import { i as __toESM, r as __require, t as __commonJSMin } from "../../_runtime.mjs";
 import { l as require_react_dom, u as require_react } from "../@floating-ui/react-dom+[...].mjs";
 import { r as parseHref } from "../tanstack__history.mjs";
-import { s as require_jsx_runtime } from "../@radix-ui/react-collection+[...].mjs";
 import { PassThrough, Readable } from "node:stream";
 import { ReadableStream as ReadableStream$1 } from "node:stream/web";
+//#region node_modules/react/cjs/react-jsx-runtime.production.js
+/**
+* @license React
+* react-jsx-runtime.production.js
+*
+* Copyright (c) Meta Platforms, Inc. and affiliates.
+*
+* This source code is licensed under the MIT license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+var require_react_jsx_runtime_production = /* @__PURE__ */ __commonJSMin(((exports) => {
+	var REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element");
+	var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
+	function jsxProd(type, config, maybeKey) {
+		var key = null;
+		void 0 !== maybeKey && (key = "" + maybeKey);
+		void 0 !== config.key && (key = "" + config.key);
+		if ("key" in config) {
+			maybeKey = {};
+			for (var propName in config) "key" !== propName && (maybeKey[propName] = config[propName]);
+		} else maybeKey = config;
+		config = maybeKey.ref;
+		return {
+			$$typeof: REACT_ELEMENT_TYPE,
+			type,
+			key,
+			ref: void 0 !== config ? config : null,
+			props: maybeKey
+		};
+	}
+	exports.Fragment = REACT_FRAGMENT_TYPE;
+	exports.jsx = jsxProd;
+	exports.jsxs = jsxProd;
+}));
+//#endregion
+//#region node_modules/react/jsx-runtime.js
+var require_jsx_runtime = /* @__PURE__ */ __commonJSMin(((exports, module) => {
+	module.exports = require_react_jsx_runtime_production();
+}));
+//#endregion
 //#region node_modules/@tanstack/router-core/dist/esm/not-found.js
 /** Determine if a value is a TanStack Router not-found error. */
 function isNotFound(obj) {
@@ -3791,11 +3830,11 @@ var BaseRootRoute = class extends BaseRoute {
 };
 //#endregion
 //#region node_modules/@tanstack/router-core/dist/esm/ssr/constants.js
+var import_jsx_runtime = require_jsx_runtime();
 var GLOBAL_TSR = "$_TSR";
 var TSR_SCRIPT_BARRIER_ID = "$tsr-stream-barrier";
 //#endregion
 //#region node_modules/@tanstack/react-router/dist/esm/CatchBoundary.js
-var import_jsx_runtime = require_jsx_runtime();
 var CatchBoundary = class extends import_react.Component {
 	constructor(..._args) {
 		super(..._args);
@@ -14564,4 +14603,4 @@ var renderRouterToStream = async ({ request, router, responseHeaders, children }
 	throw new Error("No renderToReadableStream or renderToPipeableStream found in react-dom/server. Ensure you are using a version of react-dom that supports streaming.");
 };
 //#endregion
-export { invariant as A, createInlineCssStyleAsset as C, resolveManifestCssLink as D, resolveManifestAssetLink as E, decodePath as F, rootRouteId as I, isNotFound as L, dehydrateSsrMatchId as M, isRedirect as N, _getRenderedMatches as O, isResolvedRedirect as P, createInlineCssPlaceholderAsset as S, getStylesheetHref as T, createRootRoute as _, isSsrResponse as a, GLOBAL_TSR as b, stripSsrResponseBody as c, useRouterState as d, RouterProvider as f, createFileRoute as g, lazyRouteComponent as h, disposeSsrResponseDetached as i, createSieveCache as j, executeRewriteInput as k, Scripts as l, Outlet as m, bindSsrResponseToRequest as n, normalizeSsrResponse as o, createRouter as p, defineHandlerCallback as r, replaceSsrResponse as s, renderRouterToStream as t, HeadContent as u, Link as v, getScriptPreloadAttrs as w, TSR_SCRIPT_BARRIER_ID as x, useRouter as y };
+export { invariant as A, createInlineCssStyleAsset as C, resolveManifestCssLink as D, resolveManifestAssetLink as E, decodePath as F, rootRouteId as I, isNotFound as L, dehydrateSsrMatchId as M, isRedirect as N, _getRenderedMatches as O, isResolvedRedirect as P, require_jsx_runtime as R, createInlineCssPlaceholderAsset as S, getStylesheetHref as T, createRootRoute as _, isSsrResponse as a, GLOBAL_TSR as b, stripSsrResponseBody as c, useRouterState as d, RouterProvider as f, createFileRoute as g, lazyRouteComponent as h, disposeSsrResponseDetached as i, createSieveCache as j, executeRewriteInput as k, Scripts as l, Outlet as m, bindSsrResponseToRequest as n, normalizeSsrResponse as o, createRouter as p, defineHandlerCallback as r, replaceSsrResponse as s, renderRouterToStream as t, HeadContent as u, Link as v, getScriptPreloadAttrs as w, TSR_SCRIPT_BARRIER_ID as x, useRouter as y };

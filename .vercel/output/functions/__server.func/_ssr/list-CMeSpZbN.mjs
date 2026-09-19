@@ -1,11 +1,11 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
-import { s as require_jsx_runtime } from "../_libs/@radix-ui/react-collection+[...].mjs";
+import { R as require_jsx_runtime } from "../_libs/@tanstack/react-router+[...].mjs";
+import { a as ITEM_KINDS, d as ViewToolbar, i as EmptyTrip, p as useTripWorkspace, r as Button, t as AppShell, u as TripEditors } from "./app-shell-C7Hmusn-.mjs";
 import { o as Plus } from "../_libs/lucide-react.mjs";
-import { a as ITEM_KINDS, d as ViewToolbar, f as useTripWorkspace, i as EmptyTrip, r as Button, t as AppShell, u as TripEditors } from "./app-shell-D1QgtqZa.mjs";
 import { a as format, n as parseISO } from "../_libs/date-fns.mjs";
-import { t as ItemBlock } from "./item-block-Cc22OBp_.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/list-DaKEsvVS.js
+import { t as ItemBlock } from "./item-block-BxbjwuOF.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/list-CMeSpZbN.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function ListPage() {

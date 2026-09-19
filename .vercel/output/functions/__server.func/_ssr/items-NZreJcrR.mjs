@@ -1,11 +1,10 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
-import { n as cn } from "./utils-BeLqfDNh.mjs";
-import { s as require_jsx_runtime } from "../_libs/@radix-ui/react-collection+[...].mjs";
-import { a as ITEM_KINDS, c as MiniBudget, d as ViewToolbar, f as useTripWorkspace, i as EmptyTrip, r as Button, t as AppShell, u as TripEditors } from "./app-shell-D1QgtqZa.mjs";
-import { r as PricePair, t as KindBadge } from "./price-pair-ByA9JkvS.mjs";
+import { R as require_jsx_runtime } from "../_libs/@tanstack/react-router+[...].mjs";
+import { S as cn, a as ITEM_KINDS, c as MiniBudget, d as ViewToolbar, i as EmptyTrip, p as useTripWorkspace, r as Button, t as AppShell, u as TripEditors } from "./app-shell-C7Hmusn-.mjs";
+import { r as PricePair, t as KindBadge } from "./price-pair-3IrLSgNT.mjs";
 import { a as format, n as parseISO } from "../_libs/date-fns.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/items-BCAf0sVx.js
+//#region node_modules/.nitro/vite/services/ssr/assets/items-NZreJcrR.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function ItemsPage() {

@@ -1,7 +1,5 @@
-import { defineNitroConfig } from 'nitro';
+import { defineConfig } from 'nitro';
 
-export default defineNitroConfig({
-  externals: {
-    inline: ['tslib', '@radix-ui/react-dialog']
-  }
+export default defineConfig({
+  noExternals: ['tslib', '@radix-ui/react-dialog']
 });

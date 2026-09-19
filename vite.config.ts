@@ -147,7 +147,15 @@ function authPopupPlugin(): Plugin {
 // AGENTS.md § "First scaffold".
 export default defineConfig(({ command, isPreview }) => ({
   ssr: {
-    noExternal: ['tslib']
+    noExternal: [
+      "tslib",
+      /^@radix-ui\//,
+      "react-remove-scroll",
+      "react-remove-scroll-bar",
+      "use-sidecar",
+      "use-callback-ref",
+      "aria-hidden",
+    ],
   },
   server: {
     host: "0.0.0.0",

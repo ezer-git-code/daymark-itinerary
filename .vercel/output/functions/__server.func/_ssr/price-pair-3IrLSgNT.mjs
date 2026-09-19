@@ -1,12 +1,11 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
+import { R as require_jsx_runtime } from "../_libs/@tanstack/react-router+[...].mjs";
 import { t as cva } from "../_libs/class-variance-authority+clsx.mjs";
-import { i as formatRate, n as cn, o as localToHome, r as formatMoney, s as parseMoney } from "./utils-BeLqfDNh.mjs";
-import { s as require_jsx_runtime } from "../_libs/@radix-ui/react-collection+[...].mjs";
+import { A as parseMoney, D as formatMoney, O as formatRate, S as cn, a as ITEM_KINDS, k as localToHome, o as Input, s as Label$1 } from "./app-shell-C7Hmusn-.mjs";
 import { a as ShoppingBag, f as Compass, n as Utensils } from "../_libs/lucide-react.mjs";
-import { a as ITEM_KINDS, o as Input, s as Label } from "./app-shell-D1QgtqZa.mjs";
-import { i as TooltipTrigger, n as Tooltip, r as TooltipContent } from "./router-DYYCSAec.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/price-pair-ByA9JkvS.js
+import { i as TooltipTrigger, n as Tooltip, r as TooltipContent } from "./router-CetmD1YK.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/price-pair-3IrLSgNT.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var badgeVariants = cva("inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium tracking-wide uppercase", {
@@ -61,7 +60,7 @@ function MoneyField({ label, value, onChange, localCurrency, homeCurrency, local
 	}
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		className: cn("flex min-w-0 flex-col gap-1", compact && "gap-0.5"),
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, { children: label }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, { children: label }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			className: "flex items-center gap-2",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "relative min-w-0 flex-1",
