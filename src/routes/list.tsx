@@ -14,11 +14,11 @@ import type { ItemKind } from "@/lib/types";
 export const Route = createFileRoute("/list")({ component: ListPage });
 
 const LOCATION_TONES = [
-  "border-l-sky-500 bg-sky-50/70",
-  "border-l-amber-500 bg-amber-50/70",
-  "border-l-rose-500 bg-rose-50/70",
-  "border-l-emerald-500 bg-emerald-50/70",
-  "border-l-violet-500 bg-violet-50/70",
+  "border-l-sky-500 bg-sky-50/60",
+  "border-l-amber-500 bg-amber-50/60",
+  "border-l-rose-500 bg-rose-50/60",
+  "border-l-emerald-500 bg-emerald-50/60",
+  "border-l-violet-500 bg-violet-50/60",
 ] as const;
 
 const LOCATION_DOTS = [
@@ -65,36 +65,41 @@ function ListPage() {
         <EmptyTrip onAddLocation={openNewLocation} />
       ) : (
         <div className="flex flex-col gap-5">
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-b border-border/70 pb-4">
-            <span className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
-              Locations
-            </span>
-            {w.locations.map((loc, index) => (
-              <div key={loc.id} className="flex items-center gap-2 text-sm">
-                <span
-                  className={`size-2.5 rounded-full ${LOCATION_DOTS[index % LOCATION_DOTS.length]}`}
-                  aria-hidden="true"
-                />
-                <span>{loc.name}</span>
-                <button
-                  type="button"
-                  className="text-xs text-primary underline-offset-2 hover:underline"
-                  onClick={() => {
-                    setEditingLocationId(loc.id);
-                    setLocationOpen(true);
-                  }}
+          <div className="rounded-2xl border border-border/80 bg-card/80 p-3 sm:p-4">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="mr-1 text-[10px] font-semibold tracking-[0.18em] text-muted-foreground uppercase">
+                Locations
+              </span>
+              {w.locations.map((loc, index) => (
+                <div
+                  key={loc.id}
+                  className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-2.5 py-1.5 text-sm text-foreground"
                 >
-                  Edit
-                </button>
-              </div>
-            ))}
+                  <span
+                    className={`size-2 rounded-full ${LOCATION_DOTS[index % LOCATION_DOTS.length]}`}
+                    aria-hidden="true"
+                  />
+                  <span>{loc.name}</span>
+                  <button
+                    type="button"
+                    className="text-[11px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+                    onClick={() => {
+                      setEditingLocationId(loc.id);
+                      setLocationOpen(true);
+                    }}
+                  >
+                    Edit
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
           {w.items.length === 0 ? (
-            <p className="rounded-xl bg-card px-5 py-10 text-center text-sm text-muted-foreground shadow-card">
+            <div className="rounded-2xl border border-dashed border-border bg-card/60 px-5 py-12 text-center text-sm text-muted-foreground shadow-card">
               Nothing listed yet.
-            </p>
+            </div>
           ) : (
-            <ol className="flex flex-col gap-3">
+            <ol className="flex flex-col gap-4">
               {w.items.map((item, index) => {
                 const location = w.locations.find((loc) => loc.id === item.locationId);
                 const locationIndex = location
@@ -105,7 +110,7 @@ function ListPage() {
                 return (
                   <li key={item.id}>
                     {showDateHeading && (
-                      <h2 className="mb-2 mt-4 font-display text-xl font-medium tracking-tight first:mt-0">
+                      <h2 className="mb-2 text-[11px] font-semibold tracking-[0.18em] text-muted-foreground uppercase">
                         {format(parseISO(item.date), "EEE, MMM d")}
                       </h2>
                     )}
@@ -115,7 +120,7 @@ function ListPage() {
                       localCurrency={w.trip!.currency}
                       homeCurrency={w.homeCurrency}
                       localPerHome={w.localPerHome}
-                      accentClassName={`border-l-4 ${LOCATION_TONES[locationIndex % LOCATION_TONES.length]}`}
+                      accentClassName={`border-l-2 ${LOCATION_TONES[locationIndex % LOCATION_TONES.length]}`}
                       onUpdate={(patch) => w.updateItem(item.id, patch)}
                       onEdit={() => {
                         setEditingItemId(item.id);

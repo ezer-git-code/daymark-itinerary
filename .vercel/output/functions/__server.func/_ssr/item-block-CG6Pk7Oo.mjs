@@ -1,15 +1,15 @@
 import { R as require_jsx_runtime } from "../_libs/@tanstack/react-router+[...].mjs";
 import { S as cn, r as Button } from "./app-shell-4jlYCk8G.mjs";
 import { i as Trash2, s as Pencil, u as Image } from "../_libs/lucide-react.mjs";
-import { n as KindIcon, r as PricePair, t as KindBadge } from "./price-pair-Bxi9OGRk.mjs";
+import { n as KindIcon, r as PricePair, t as KindBadge } from "./price-pair-F6FLP4dm.mjs";
 import { a as format, n as parseISO } from "../_libs/date-fns.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/item-block-B6KD7MbN.js
+//#region node_modules/.nitro/vite/services/ssr/assets/item-block-CG6Pk7Oo.js
 var import_jsx_runtime = require_jsx_runtime();
-function ItemBlock({ item, location, localCurrency, homeCurrency, localPerHome, onUpdate, onEdit, onDelete, dense }) {
+function ItemBlock({ item, location, localCurrency, homeCurrency, localPerHome, onUpdate, onEdit, onDelete, dense, accentClassName }) {
 	const notes = item.notes ?? "";
 	const images = Array.isArray(item.images) ? item.images : [];
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("article", {
-		className: cn("rounded-lg bg-background/60 p-4", dense && "p-3"),
+		className: cn("rounded-2xl border border-border/80 bg-white/80 p-4 shadow-[0_1px_0_rgba(15,23,42,0.02)] transition-colors", dense && "p-3", accentClassName),
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			className: "flex items-start gap-3",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {

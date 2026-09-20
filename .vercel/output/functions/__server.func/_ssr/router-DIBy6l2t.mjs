@@ -4,7 +4,7 @@ import { R as require_jsx_runtime, _ as createRootRoute, g as createFileRoute, h
 import { C as composeEventHandlers, E as createSlottable, F as useLayoutEffect2, M as useComposedRefs, N as useControllableState, P as useId, S as cn, T as createPopperScope, _ as Portal$1, b as Root, f as __exportAll, g as DismissableLayer, h as Content, j as useAppStore, m as Anchor, v as Presence, w as createContextScope, x as Root2, y as Primitive } from "./app-shell-4jlYCk8G.mjs";
 import { r as TriangleAlert } from "../_libs/lucide-react.mjs";
 import { a as union, i as string, n as number, r as object, t as literal } from "../_libs/zod.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-Ba6S5V4e.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-DIBy6l2t.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var FALLBACK_MESSAGE = "An unexpected error occurred. Try reloading the page.";
@@ -821,7 +821,7 @@ function TooltipContent({ className, sideOffset = 6, ...props }) {
 		...props
 	}) });
 }
-var styles_default = "/assets/styles-xv3CAs_f.css";
+var styles_default = "/assets/styles-CLX8u3bZ.css";
 var Route$6 = createRootRoute({
 	head: () => ({
 		meta: [
@@ -889,15 +889,15 @@ var Route$6 = createRootRoute({
 });
 var $$splitComponentImporter$5 = () => import("./routes-CXggzSUB.mjs");
 var Route$5 = createFileRoute("/")({ component: lazyRouteComponent($$splitComponentImporter$5, "component") });
-var $$splitComponentImporter$4 = () => import("./board-bMviVh_S.mjs");
+var $$splitComponentImporter$4 = () => import("./board-D8VyF5ru.mjs");
 var Route$4 = createFileRoute("/board")({ component: lazyRouteComponent($$splitComponentImporter$4, "component") });
-var $$splitComponentImporter$3 = () => import("./calendar-BE6o-7hh.mjs");
+var $$splitComponentImporter$3 = () => import("./calendar-Dqs_KKBZ.mjs");
 var Route$3 = createFileRoute("/calendar")({ component: lazyRouteComponent($$splitComponentImporter$3, "component") });
-var $$splitComponentImporter$2 = () => import("./items-d06gnxrW.mjs");
+var $$splitComponentImporter$2 = () => import("./items-PwRyYNw7.mjs");
 var Route$2 = createFileRoute("/items")({ component: lazyRouteComponent($$splitComponentImporter$2, "component") });
 var $$splitComponentImporter$1 = () => import("./journal-BLOk385k.mjs");
 var Route$1 = createFileRoute("/journal")({ component: lazyRouteComponent($$splitComponentImporter$1, "component") });
-var $$splitComponentImporter = () => import("./list-Rvkn0Vef.mjs");
+var $$splitComponentImporter = () => import("./list-RdkqMt_I.mjs");
 var Route = createFileRoute("/list")({ component: lazyRouteComponent($$splitComponentImporter, "component") });
 var rootRouteChildren = {
 	IndexRoute: Route$5.update({

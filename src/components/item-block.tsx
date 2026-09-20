@@ -35,7 +35,7 @@ export function ItemBlock({
   return (
     <article
       className={cn(
-        "rounded-lg bg-background/60 p-4",
+        "rounded-2xl border border-border/80 bg-white/80 p-4 shadow-[0_1px_0_rgba(15,23,42,0.02)] transition-colors",
         dense && "p-3",
         accentClassName,
       )}
