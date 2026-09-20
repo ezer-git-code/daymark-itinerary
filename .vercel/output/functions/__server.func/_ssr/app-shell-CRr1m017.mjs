@@ -1735,7 +1735,7 @@ function cn(...inputs) {
 	return twMerge(clsx(inputs));
 }
 //#endregion
-//#region node_modules/.nitro/vite/services/ssr/assets/app-shell-C7Hmusn-.js
+//#region node_modules/.nitro/vite/services/ssr/assets/app-shell-CRr1m017.js
 var __create = Object.create;
 var __defProp$13 = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -1774,7 +1774,7 @@ function BudgetLedger({ budget, estimated, actual, homeCurrency }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 		className: "rounded-xl bg-card p-5 shadow-card sm:p-6",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "grid grid-cols-3 gap-3",
+			className: "grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-3",
 			children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Stat, {
 					label: "Total budget",
@@ -1824,7 +1824,7 @@ function Stat({ label, value, hint, warn }) {
 				children: label
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-				className: cn("mt-1 truncate font-display text-xl font-medium tracking-tight tabular-nums sm:text-2xl", warn ? "text-destructive" : "text-foreground"),
+				className: cn("mt-1 whitespace-nowrap font-display text-2xl font-medium tracking-tight tabular-nums", warn ? "text-destructive" : "text-foreground"),
 				children: value
 			}),
 			hint && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
