@@ -1,9 +1,9 @@
 import { R as require_jsx_runtime } from "../_libs/@tanstack/react-router+[...].mjs";
-import { S as cn, r as Button } from "./app-shell-CRr1m017.mjs";
+import { S as cn, r as Button } from "./app-shell-8nqwo2p7.mjs";
 import { i as Trash2, s as Pencil, u as Image } from "../_libs/lucide-react.mjs";
-import { n as KindIcon, r as PricePair, t as KindBadge } from "./price-pair-BxNIl2Px.mjs";
+import { n as KindIcon, r as PricePair, t as KindBadge } from "./price-pair-DCh2Zwfu.mjs";
 import { a as format, n as parseISO } from "../_libs/date-fns.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/item-block-CTTXLPxC.js
+//#region node_modules/.nitro/vite/services/ssr/assets/item-block-DLEpPpa0.js
 var import_jsx_runtime = require_jsx_runtime();
 function ItemBlock({ item, location, localCurrency, homeCurrency, localPerHome, onUpdate, onEdit, onDelete, dense }) {
 	const notes = item.notes ?? "";

@@ -59,9 +59,15 @@ function ListPage() {
                 <div className="sm:pt-1">
                   <p className="font-display text-2xl font-medium tracking-tight">
                     {format(parseISO(loc.date), "d")}
+                    {loc.endDate && loc.endDate !== loc.date
+                      ? `-${format(parseISO(loc.endDate), "d")}`
+                      : ""}
                   </p>
                   <p className="text-xs tracking-wide text-muted-foreground uppercase">
                     {format(parseISO(loc.date), "EEE MMM")}
+                    {loc.endDate && loc.endDate !== loc.date
+                      ? ` - ${format(parseISO(loc.endDate), "EEE MMM")}`
+                      : ""}
                   </p>
                   <button
                     type="button"

@@ -185,10 +185,11 @@ export function LocationDialog({
   onOpenChange: (v: boolean) => void;
   initial?: Location | null;
   defaultDate?: string;
-  onSubmit: (loc: { name: string; date: string }) => void;
+  onSubmit: (loc: { name: string; date: string; endDate?: string }) => void;
 }) {
   const [name, setName] = useState(initial?.name ?? "");
   const [date, setDate] = useState(initial?.date ?? defaultDate ?? "");
+  const [endDate, setEndDate] = useState(initial?.endDate ?? "");
 
   return (
     <Dialog
@@ -197,6 +198,7 @@ export function LocationDialog({
         if (v) {
           setName(initial?.name ?? "");
           setDate(initial?.date ?? defaultDate ?? "");
+          setEndDate(initial?.endDate ?? "");
         }
         onOpenChange(v);
       }}
@@ -205,7 +207,7 @@ export function LocationDialog({
         <DialogHeader>
           <DialogTitle>{initial ? "Edit location" : "Add location"}</DialogTitle>
           <DialogDescription>
-            Each stop on the trip. Set the date yourself.
+            Each stop on the trip. Add an end date for multi-day stays.
           </DialogDescription>
         </DialogHeader>
         <form
@@ -215,6 +217,7 @@ export function LocationDialog({
             onSubmit({
               name: name.trim() || "Untitled",
               date: date || new Date().toISOString().slice(0, 10),
+              endDate: endDate && endDate >= date ? endDate : undefined,
             });
             onOpenChange(false);
           }}
@@ -233,6 +236,14 @@ export function LocationDialog({
               value={date}
               onChange={(e) => setDate(e.target.value)}
               required
+            />
+          </Field>
+          <Field label="End date (optional)">
+            <Input
+              type="date"
+              value={endDate}
+              min={date || undefined}
+              onChange={(e) => setEndDate(e.target.value)}
             />
           </Field>
           <DialogFooter>

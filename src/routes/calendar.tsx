@@ -49,7 +49,11 @@ function CalendarPage() {
 
   const key = format(selected, "yyyy-MM-dd");
   const dayItems = w.items.filter((i) => i.date === key);
-  const dayLocs = w.locations.filter((l) => l.date === key);
+  const dayLocs = w.locations.filter((l) => {
+    const start = parseISO(l.date);
+    const end = parseISO(l.endDate ?? l.date);
+    return isWithinInterval(selected, { start, end });
+  });
 
   const tripInterval =
     w.trip && {
@@ -63,7 +67,12 @@ function CalendarPage() {
       map.set(item.date, (map.get(item.date) ?? 0) + 1);
     }
     for (const loc of w.locations) {
-      if (!map.has(loc.date)) map.set(loc.date, 0);
+      const start = parseISO(loc.date);
+      const end = parseISO(loc.endDate ?? loc.date);
+      for (const day of eachDayOfInterval({ start, end })) {
+        const iso = format(day, "yyyy-MM-dd");
+        if (!map.has(iso)) map.set(iso, 0);
+      }
     }
     return map;
   }, [w.items, w.locations]);

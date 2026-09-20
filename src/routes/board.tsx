@@ -62,6 +62,9 @@ function BoardPage() {
                 <header className="p-4 pb-2">
                   <p className="text-xs tracking-wide text-muted-foreground uppercase">
                     {format(parseISO(loc.date), "EEE d MMM")}
+                    {loc.endDate && loc.endDate !== loc.date
+                      ? ` - ${format(parseISO(loc.endDate), "EEE d MMM")}`
+                      : ""}
                   </p>
                   <h2 className="font-display text-xl font-medium tracking-tight">
                     {loc.name}

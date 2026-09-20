@@ -1735,7 +1735,7 @@ function cn(...inputs) {
 	return twMerge(clsx(inputs));
 }
 //#endregion
-//#region node_modules/.nitro/vite/services/ssr/assets/app-shell-CRr1m017.js
+//#region node_modules/.nitro/vite/services/ssr/assets/app-shell-8nqwo2p7.js
 var __create = Object.create;
 var __defProp$13 = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -1774,7 +1774,7 @@ function BudgetLedger({ budget, estimated, actual, homeCurrency }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 		className: "rounded-xl bg-card p-5 shadow-card sm:p-6",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-3",
+			className: "grid grid-rows-3 gap-4 sm:grid-cols-3 sm:gap-3",
 			children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Stat, {
 					label: "Total budget",
@@ -5297,22 +5297,25 @@ function TripDialog({ open, onOpenChange, initial, homeCurrency, onSubmit }) {
 function LocationDialog({ open, onOpenChange, initial, defaultDate, onSubmit }) {
 	const [name, setName] = (0, import_react.useState)(initial?.name ?? "");
 	const [date, setDate] = (0, import_react.useState)(initial?.date ?? defaultDate ?? "");
+	const [endDate, setEndDate] = (0, import_react.useState)(initial?.endDate ?? "");
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
 		open,
 		onOpenChange: (v) => {
 			if (v) {
 				setName(initial?.name ?? "");
 				setDate(initial?.date ?? defaultDate ?? "");
+				setEndDate(initial?.endDate ?? "");
 			}
 			onOpenChange(v);
 		},
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogHeader, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, { children: initial ? "Edit location" : "Add location" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogDescription, { children: "Each stop on the trip. Set the date yourself." })] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogHeader, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, { children: initial ? "Edit location" : "Add location" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogDescription, { children: "Each stop on the trip. Add an end date for multi-day stays." })] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
 			className: "grid gap-4",
 			onSubmit: (e) => {
 				e.preventDefault();
 				onSubmit({
 					name: name.trim() || "Untitled",
-					date: date || (/* @__PURE__ */ new Date()).toISOString().slice(0, 10)
+					date: date || (/* @__PURE__ */ new Date()).toISOString().slice(0, 10),
+					endDate: endDate && endDate >= date ? endDate : void 0
 				});
 				onOpenChange(false);
 			},
@@ -5333,6 +5336,15 @@ function LocationDialog({ open, onOpenChange, initial, defaultDate, onSubmit }) 
 						value: date,
 						onChange: (e) => setDate(e.target.value),
 						required: true
+					})
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Field, {
+					label: "End date (optional)",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+						type: "date",
+						value: endDate,
+						min: date || void 0,
+						onChange: (e) => setEndDate(e.target.value)
 					})
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {

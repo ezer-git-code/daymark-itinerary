@@ -17,6 +17,7 @@ export type Location = {
   tripId: string;
   name: string;
   date: string;
+  endDate?: string;
   sortOrder: number;
 };
 
