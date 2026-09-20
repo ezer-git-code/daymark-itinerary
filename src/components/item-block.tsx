@@ -16,6 +16,7 @@ export function ItemBlock({
   onEdit,
   onDelete,
   dense,
+  accentClassName,
 }: {
   item: TripItem;
   location?: Location;
@@ -26,6 +27,7 @@ export function ItemBlock({
   onEdit: () => void;
   onDelete: () => void;
   dense?: boolean;
+  accentClassName?: string;
 }) {
   const notes = item.notes ?? "";
   const images = Array.isArray(item.images) ? item.images : [];
@@ -35,6 +37,7 @@ export function ItemBlock({
       className={cn(
         "rounded-lg bg-background/60 p-4",
         dense && "p-3",
+        accentClassName,
       )}
     >
       <div className="flex items-start gap-3">

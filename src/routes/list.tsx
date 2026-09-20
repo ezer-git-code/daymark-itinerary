@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { format, parseISO } from "date-fns";
-import { Plus } from "lucide-react";
 import { useState } from "react";
 import {
   AppShell,
@@ -10,11 +9,25 @@ import {
   useTripWorkspace,
 } from "@/components/app-shell";
 import { ItemBlock } from "@/components/item-block";
-import { Button } from "@/components/ui/button";
-import { ITEM_KINDS } from "@/lib/types";
 import type { ItemKind } from "@/lib/types";
 
 export const Route = createFileRoute("/list")({ component: ListPage });
+
+const LOCATION_TONES = [
+  "border-l-sky-500 bg-sky-50/70",
+  "border-l-amber-500 bg-amber-50/70",
+  "border-l-rose-500 bg-rose-50/70",
+  "border-l-emerald-500 bg-emerald-50/70",
+  "border-l-violet-500 bg-violet-50/70",
+] as const;
+
+const LOCATION_DOTS = [
+  "bg-sky-500",
+  "bg-amber-500",
+  "bg-rose-500",
+  "bg-emerald-500",
+  "bg-violet-500",
+] as const;
 
 function ListPage() {
   const w = useTripWorkspace();
@@ -51,95 +64,71 @@ function ListPage() {
       {!w.trip || w.locations.length === 0 ? (
         <EmptyTrip onAddLocation={openNewLocation} />
       ) : (
-        <ol className="flex flex-col gap-8">
-          {w.locations.map((loc) => {
-            const locItems = w.items.filter((i) => i.locationId === loc.id);
-            return (
-              <li key={loc.id} className="grid gap-4 sm:grid-cols-[7rem_1fr]">
-                <div className="sm:pt-1">
-                  <p className="font-display text-2xl font-medium tracking-tight">
-                    {format(parseISO(loc.date), "d")}
-                    {loc.endDate && loc.endDate !== loc.date
-                      ? `-${format(parseISO(loc.endDate), "d")}`
-                      : ""}
-                  </p>
-                  <p className="text-xs tracking-wide text-muted-foreground uppercase">
-                    {format(parseISO(loc.date), "EEE MMM")}
-                    {loc.endDate && loc.endDate !== loc.date
-                      ? ` - ${format(parseISO(loc.endDate), "EEE MMM")}`
-                      : ""}
-                  </p>
-                  <button
-                    type="button"
-                    className="mt-2 text-xs text-primary underline-offset-2 hover:underline"
-                    onClick={() => {
-                      setEditingLocationId(loc.id);
-                      setLocationOpen(true);
-                    }}
-                  >
-                    Edit stop
-                  </button>
-                </div>
-                <div className="rounded-xl bg-card p-4 shadow-card sm:p-5">
-                  <div className="flex items-baseline justify-between gap-3">
-                    <h2 className="font-display text-2xl font-medium tracking-tight">
-                      {loc.name}
-                    </h2>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => w.deleteLocation(loc.id)}
-                    >
-                      Remove
-                    </Button>
-                  </div>
-                  <div className="mt-4 flex flex-col gap-6">
-                    {ITEM_KINDS.map((kind) => {
-                      const group = locItems.filter((i) => i.kind === kind.id);
-                      return (
-                        <section key={kind.id}>
-                          <div className="mb-2 flex items-center justify-between">
-                            <h3 className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
-                              {kind.section}
-                            </h3>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => openNewItem(loc.id, kind.id)}
-                            >
-                              <Plus /> Add
-                            </Button>
-                          </div>
-                          {group.length === 0 ? (
-                            <p className="text-sm text-muted-foreground">Nothing listed.</p>
-                          ) : (
-                            <div className="flex flex-col gap-2">
-                              {group.map((item) => (
-                                <ItemBlock
-                                  key={item.id}
-                                  item={item}
-                                  localCurrency={w.trip!.currency}
-                                  homeCurrency={w.homeCurrency}
-                                  localPerHome={w.localPerHome}
-                                  onUpdate={(patch) => w.updateItem(item.id, patch)}
-                                  onEdit={() => {
-                                    setEditingItemId(item.id);
-                                    setItemOpen(true);
-                                  }}
-                                  onDelete={() => w.deleteItem(item.id)}
-                                />
-                              ))}
-                            </div>
-                          )}
-                        </section>
-                      );
-                    })}
-                  </div>
-                </div>
-              </li>
-            );
-          })}
-        </ol>
+        <div className="flex flex-col gap-5">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-b border-border/70 pb-4">
+            <span className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+              Locations
+            </span>
+            {w.locations.map((loc, index) => (
+              <div key={loc.id} className="flex items-center gap-2 text-sm">
+                <span
+                  className={`size-2.5 rounded-full ${LOCATION_DOTS[index % LOCATION_DOTS.length]}`}
+                  aria-hidden="true"
+                />
+                <span>{loc.name}</span>
+                <button
+                  type="button"
+                  className="text-xs text-primary underline-offset-2 hover:underline"
+                  onClick={() => {
+                    setEditingLocationId(loc.id);
+                    setLocationOpen(true);
+                  }}
+                >
+                  Edit
+                </button>
+              </div>
+            ))}
+          </div>
+          {w.items.length === 0 ? (
+            <p className="rounded-xl bg-card px-5 py-10 text-center text-sm text-muted-foreground shadow-card">
+              Nothing listed yet.
+            </p>
+          ) : (
+            <ol className="flex flex-col gap-3">
+              {w.items.map((item, index) => {
+                const location = w.locations.find((loc) => loc.id === item.locationId);
+                const locationIndex = location
+                  ? w.locations.findIndex((loc) => loc.id === location.id)
+                  : 0;
+                const showDateHeading =
+                  index === 0 || item.date !== w.items[index - 1]?.date;
+                return (
+                  <li key={item.id}>
+                    {showDateHeading && (
+                      <h2 className="mb-2 mt-4 font-display text-xl font-medium tracking-tight first:mt-0">
+                        {format(parseISO(item.date), "EEE, MMM d")}
+                      </h2>
+                    )}
+                    <ItemBlock
+                      item={item}
+                      location={location}
+                      localCurrency={w.trip!.currency}
+                      homeCurrency={w.homeCurrency}
+                      localPerHome={w.localPerHome}
+                      accentClassName={`border-l-4 ${LOCATION_TONES[locationIndex % LOCATION_TONES.length]}`}
+                      onUpdate={(patch) => w.updateItem(item.id, patch)}
+                      onEdit={() => {
+                        setEditingItemId(item.id);
+                        setItemOpen(true);
+                      }}
+                      onDelete={() => w.deleteItem(item.id)}
+                    />
+                  </li>
+                );
+              })}
+            </ol>
+          )}
+        </div>
       )}
       <TripEditors
         locationOpen={locationOpen}
