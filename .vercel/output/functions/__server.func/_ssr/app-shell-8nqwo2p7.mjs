@@ -5384,14 +5384,15 @@ function ItemDialog({ open, onOpenChange, initial, locations, defaultLocationId,
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
 		open,
 		onOpenChange: (v) => {
-			if (v) {
-				setTitle(initial?.title ?? "");
-				setKind(initial?.kind ?? defaultKind ?? "experience");
-				setLocationId(initial?.locationId ?? defaultLocationId ?? locations[0]?.id ?? "");
-				setDate(initial?.date ?? "");
-				setNotes(initial?.notes ?? "");
-				setImages(initial?.images ?? []);
+			if (v && initial) {
+				setTitle(initial.title);
+				setKind(initial.kind);
+				setLocationId(initial.locationId);
+				setDate(initial.date);
+				setNotes(initial.notes);
+				setImages(initial.images);
 			}
+
 			onOpenChange(v);
 		},
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogHeader, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, { children: initial ? "Edit item" : "Add to the list" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogDescription, { children: "Experiences, food, or things to buy. Date defaults to the location." })] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
