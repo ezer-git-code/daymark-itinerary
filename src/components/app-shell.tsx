@@ -339,6 +339,7 @@ export function TripEditors({
         }}
       />
       <ItemDialog
+        key={item?.id ?? "new-item"}
         open={itemOpen}
         onOpenChange={setItemOpen}
         initial={item}

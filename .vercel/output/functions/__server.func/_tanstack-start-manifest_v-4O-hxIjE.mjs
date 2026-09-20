@@ -1,4 +1,4 @@
-//#region node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-Bzt1TeKL.js
+//#region node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-4O-hxIjE.js
 var tsrStartManifest = () => ({ routes: {
 	__root__: {
 		filePath: "C:/Users/Test/Downloads/grok-workspace/src/routes/__root.tsx",
@@ -10,67 +10,67 @@ var tsrStartManifest = () => ({ routes: {
 			"/journal",
 			"/list"
 		],
-		preloads: ["/assets/index-SeGtS3gI.js"],
+		preloads: ["/assets/index-BUmuyIvP.js"],
 		scripts: [{ attrs: {
 			type: "module",
 			async: !0,
-			src: "/assets/index-SeGtS3gI.js"
+			src: "/assets/index-BUmuyIvP.js"
 		} }]
 	},
 	"/": {
 		filePath: "C:/Users/Test/Downloads/grok-workspace/src/routes/index.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/routes-CJ9ju9Ky.js",
-			"/assets/app-shell-DqXWvzX4.js",
-			"/assets/pencil-BvIyrAQS.js"
+			"/assets/routes-BcqRD1Cq.js",
+			"/assets/app-shell-C3Gfp6Z6.js",
+			"/assets/pencil-CJurn1qI.js"
 		]
 	},
 	"/board": {
 		filePath: "C:/Users/Test/Downloads/grok-workspace/src/routes/board.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/board-DbOUyb8D.js",
-			"/assets/app-shell-DqXWvzX4.js",
-			"/assets/price-pair-CFtKWWCp.js"
+			"/assets/board-Bg_M4NXl.js",
+			"/assets/app-shell-C3Gfp6Z6.js",
+			"/assets/price-pair-DOLcKSlJ.js"
 		]
 	},
 	"/calendar": {
 		filePath: "C:/Users/Test/Downloads/grok-workspace/src/routes/calendar.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/calendar-Bm6eSYgc.js",
-			"/assets/app-shell-DqXWvzX4.js",
-			"/assets/price-pair-CFtKWWCp.js",
-			"/assets/item-block-R_vRFRvY.js"
+			"/assets/calendar-BVf11oPE.js",
+			"/assets/app-shell-C3Gfp6Z6.js",
+			"/assets/price-pair-DOLcKSlJ.js",
+			"/assets/item-block-M4YC1xE4.js"
 		]
 	},
 	"/items": {
 		filePath: "C:/Users/Test/Downloads/grok-workspace/src/routes/items.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/items-CVSJnKTi.js",
-			"/assets/app-shell-DqXWvzX4.js",
-			"/assets/price-pair-CFtKWWCp.js"
+			"/assets/items-B_ZznnC2.js",
+			"/assets/app-shell-C3Gfp6Z6.js",
+			"/assets/price-pair-DOLcKSlJ.js"
 		]
 	},
 	"/journal": {
 		filePath: "C:/Users/Test/Downloads/grok-workspace/src/routes/journal.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/journal-88_P2Mz-.js",
-			"/assets/app-shell-DqXWvzX4.js",
-			"/assets/image-DltxfOz-.js",
-			"/assets/pencil-BvIyrAQS.js"
+			"/assets/journal-BliUdifF.js",
+			"/assets/app-shell-C3Gfp6Z6.js",
+			"/assets/image-DSKKd3gY.js",
+			"/assets/pencil-CJurn1qI.js"
 		]
 	},
 	"/list": {
 		filePath: "C:/Users/Test/Downloads/grok-workspace/src/routes/list.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/list-B4vxo6jJ.js",
-			"/assets/app-shell-DqXWvzX4.js",
-			"/assets/item-block-R_vRFRvY.js"
+			"/assets/list-CT_RieFP.js",
+			"/assets/app-shell-C3Gfp6Z6.js",
+			"/assets/item-block-M4YC1xE4.js"
 		]
 	}
 } });

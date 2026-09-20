@@ -1,12 +1,12 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
 import { R as require_jsx_runtime } from "../_libs/@tanstack/react-router+[...].mjs";
-import { S as cn, d as ViewToolbar, i as EmptyTrip, p as useTripWorkspace, r as Button, t as AppShell, u as TripEditors } from "./app-shell-8nqwo2p7.mjs";
+import { S as cn, d as ViewToolbar, i as EmptyTrip, p as useTripWorkspace, r as Button, t as AppShell, u as TripEditors } from "./app-shell-4jlYCk8G.mjs";
 import { g as ChevronLeft, h as ChevronRight } from "../_libs/lucide-react.mjs";
-import { n as KindIcon } from "./price-pair-DCh2Zwfu.mjs";
+import { n as KindIcon } from "./price-pair-Bxi9OGRk.mjs";
 import { a as format, c as eachDayOfInterval, d as startOfWeek, f as addMonths, i as isSameMonth, l as endOfMonth, n as parseISO, o as endOfWeek, r as isWithinInterval, s as startOfMonth, t as subMonths, u as isSameDay } from "../_libs/date-fns.mjs";
-import { t as ItemBlock } from "./item-block-DLEpPpa0.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/calendar-Db9vcbV8.js
+import { t as ItemBlock } from "./item-block-B6KD7MbN.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/calendar-BE6o-7hh.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function CalendarPage() {
@@ -28,7 +28,14 @@ function CalendarPage() {
 	}, [month]);
 	const key = format(selected, "yyyy-MM-dd");
 	const dayItems = w.items.filter((i) => i.date === key);
-	const dayLocs = w.locations.filter((l) => l.date === key);
+	const dayLocs = w.locations.filter((l) => {
+		const start = parseISO(l.date);
+		const end = parseISO(l.endDate ?? l.date);
+		return isWithinInterval(selected, {
+			start,
+			end
+		});
+	});
 	const tripInterval = w.trip && {
 		start: parseISO(w.trip.startDate),
 		end: parseISO(w.trip.endDate)
@@ -36,7 +43,17 @@ function CalendarPage() {
 	const counts = (0, import_react.useMemo)(() => {
 		const map = /* @__PURE__ */ new Map();
 		for (const item of w.items) map.set(item.date, (map.get(item.date) ?? 0) + 1);
-		for (const loc of w.locations) if (!map.has(loc.date)) map.set(loc.date, 0);
+		for (const loc of w.locations) {
+			const start = parseISO(loc.date);
+			const end = parseISO(loc.endDate ?? loc.date);
+			for (const day of eachDayOfInterval({
+				start,
+				end
+			})) {
+				const iso = format(day, "yyyy-MM-dd");
+				if (!map.has(iso)) map.set(iso, 0);
+			}
+		}
 		return map;
 	}, [w.items, w.locations]);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AppShell, {

@@ -1735,7 +1735,7 @@ function cn(...inputs) {
 	return twMerge(clsx(inputs));
 }
 //#endregion
-//#region node_modules/.nitro/vite/services/ssr/assets/app-shell-8nqwo2p7.js
+//#region node_modules/.nitro/vite/services/ssr/assets/app-shell-4jlYCk8G.js
 var __create = Object.create;
 var __defProp$13 = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -5176,6 +5176,9 @@ function TripDialog({ open, onOpenChange, initial, homeCurrency, onSubmit }) {
 		setBudgetHome(next ? String(next.budgetHome) : "");
 		setCustomRate(next?.customRate != null ? String(next.customRate) : "");
 	}
+	(0, import_react.useEffect)(() => {
+		if (open) resetFrom(initial);
+	}, [open, initial?.id]);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
 		open,
 		onOpenChange: (v) => {
@@ -5298,6 +5301,16 @@ function LocationDialog({ open, onOpenChange, initial, defaultDate, onSubmit }) 
 	const [name, setName] = (0, import_react.useState)(initial?.name ?? "");
 	const [date, setDate] = (0, import_react.useState)(initial?.date ?? defaultDate ?? "");
 	const [endDate, setEndDate] = (0, import_react.useState)(initial?.endDate ?? "");
+	(0, import_react.useEffect)(() => {
+		if (!open) return;
+		setName(initial?.name ?? "");
+		setDate(initial?.date ?? defaultDate ?? "");
+		setEndDate(initial?.endDate ?? "");
+	}, [
+		open,
+		initial?.id,
+		defaultDate
+	]);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
 		open,
 		onOpenChange: (v) => {
@@ -5367,6 +5380,21 @@ function ItemDialog({ open, onOpenChange, initial, locations, defaultLocationId,
 	const [date, setDate] = (0, import_react.useState)(initial?.date ?? "");
 	const [notes, setNotes] = (0, import_react.useState)(initial?.notes ?? "");
 	const [images, setImages] = (0, import_react.useState)(initial?.images ?? []);
+	(0, import_react.useEffect)(() => {
+		if (!open) return;
+		setTitle(initial?.title ?? "");
+		setKind(initial?.kind ?? defaultKind ?? "experience");
+		setLocationId(initial?.locationId ?? defaultLocationId ?? locations[0]?.id ?? "");
+		setDate(initial?.date ?? "");
+		setNotes(initial?.notes ?? "");
+		setImages(Array.isArray(initial?.images) ? initial.images : []);
+	}, [
+		open,
+		initial?.id,
+		defaultKind,
+		defaultLocationId,
+		locations[0]?.id
+	]);
 	const loc = locations.find((l) => l.id === locationId);
 	const imageCount = (0, import_react.useMemo)(() => images.filter(Boolean).length, [images]);
 	function handleImageFiles(fileList) {
@@ -5384,15 +5412,14 @@ function ItemDialog({ open, onOpenChange, initial, locations, defaultLocationId,
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
 		open,
 		onOpenChange: (v) => {
-			if (v && initial) {
-				setTitle(initial.title);
-				setKind(initial.kind);
-				setLocationId(initial.locationId);
-				setDate(initial.date);
-				setNotes(initial.notes);
-				setImages(initial.images);
+			if (v) {
+				setTitle(initial?.title ?? "");
+				setKind(initial?.kind ?? defaultKind ?? "experience");
+				setLocationId(initial?.locationId ?? defaultLocationId ?? locations[0]?.id ?? "");
+				setDate(initial?.date ?? "");
+				setNotes(initial?.notes ?? "");
+				setImages(initial?.images ?? []);
 			}
-
 			onOpenChange(v);
 		},
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogHeader, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, { children: initial ? "Edit item" : "Add to the list" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogDescription, { children: "Experiences, food, or things to buy. Date defaults to the location." })] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
@@ -6659,7 +6686,7 @@ function TripEditors({ locationOpen, setLocationOpen, itemOpen, setItemOpen, edi
 				actualLocal: null
 			});
 		}
-	})] });
+	}, item?.id ?? "new-item")] });
 }
 function EmptyTrip({ onAddLocation, onNewTrip }) {
 	const loadSample = useAppStore((s) => s.loadSample);
