@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -57,6 +57,10 @@ export function TripDialog({
     setBudgetHome(next ? String(next.budgetHome) : "");
     setCustomRate(next?.customRate != null ? String(next.customRate) : "");
   }
+
+  useEffect(() => {
+    if (open) resetFrom(initial);
+  }, [open, initial?.id]);
 
   return (
     <Dialog
@@ -191,6 +195,13 @@ export function LocationDialog({
   const [date, setDate] = useState(initial?.date ?? defaultDate ?? "");
   const [endDate, setEndDate] = useState(initial?.endDate ?? "");
 
+  useEffect(() => {
+    if (!open) return;
+    setName(initial?.name ?? "");
+    setDate(initial?.date ?? defaultDate ?? "");
+    setEndDate(initial?.endDate ?? "");
+  }, [open, initial?.id, defaultDate]);
+
   return (
     <Dialog
       open={open}
@@ -290,6 +301,18 @@ export function ItemDialog({
   const [date, setDate] = useState(initial?.date ?? "");
   const [notes, setNotes] = useState(initial?.notes ?? "");
   const [images, setImages] = useState<string[]>(initial?.images ?? []);
+
+  useEffect(() => {
+    if (!open) return;
+    setTitle(initial?.title ?? "");
+    setKind(initial?.kind ?? defaultKind ?? "experience");
+    setLocationId(
+      initial?.locationId ?? defaultLocationId ?? locations[0]?.id ?? "",
+    );
+    setDate(initial?.date ?? "");
+    setNotes(initial?.notes ?? "");
+    setImages(Array.isArray(initial?.images) ? initial.images : []);
+  }, [open, initial?.id, defaultKind, defaultLocationId, locations[0]?.id]);
 
   const loc = locations.find((l) => l.id === locationId);
   const imageCount = useMemo(() => images.filter(Boolean).length, [images]);
