@@ -19,7 +19,7 @@ export function BudgetLedger({
 
   return (
     <section className="rounded-xl bg-card p-5 shadow-card sm:p-6">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-3">
+      <div className="grid grid-rows-3 gap-4 sm:grid-cols-3 sm:gap-3">
         <Stat label="Total budget" value={formatMoney(budget, homeCurrency)} />
         <Stat
           label="Estimated"
