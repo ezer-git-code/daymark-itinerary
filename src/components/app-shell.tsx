@@ -101,7 +101,7 @@ export function AppShell({
               ))}
             </nav>
           )}
-          <div className="ml-auto flex flex-wrap gap-1">
+          <div className="ml-auto flex flex-col items-end gap-1">
             <div className="flex items-center gap-2">
               {trips.length > 0 && (
                 <DropdownMenu>
