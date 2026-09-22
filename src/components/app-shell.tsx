@@ -101,7 +101,7 @@ export function AppShell({
               ))}
             </nav>
           )}
-          <div className="ml-auto flex items-center gap-2">
+          <div className="ml-auto flex flex-wrap items-center justify-end gap-2">
             {trips.length > 0 && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -162,13 +162,9 @@ export function AppShell({
                 ))}
               </SelectContent>
             </Select>
+            {actions && <div className="flex flex-wrap items-center gap-2">{actions}</div>}
           </div>
         </div>
-        {actions && (
-          <div className="mx-auto flex max-w-6xl justify-end px-4 pb-3 sm:px-6">
-            <div className="flex flex-wrap justify-end gap-2">{actions}</div>
-          </div>
-        )}
       </header>
 
       <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 pt-6 pb-24 sm:px-6 sm:pb-12">

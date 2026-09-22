@@ -1,10 +1,10 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
 import { R as require_jsx_runtime } from "../_libs/@tanstack/react-router+[...].mjs";
-import { d as ViewToolbar, i as EmptyTrip, p as useTripWorkspace, t as AppShell, u as TripEditors } from "./app-shell-4jlYCk8G.mjs";
+import { d as ViewToolbar, i as EmptyTrip, p as useTripWorkspace, t as AppShell, u as TripEditors } from "./app-shell-BECy1Q7E.mjs";
 import { a as format, n as parseISO } from "../_libs/date-fns.mjs";
-import { t as ItemBlock } from "./item-block-CG6Pk7Oo.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/list-RdkqMt_I.js
+import { t as ItemBlock } from "./item-block-B2XGiqhC.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/list-CTjyIihe.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var LOCATION_TONES = [

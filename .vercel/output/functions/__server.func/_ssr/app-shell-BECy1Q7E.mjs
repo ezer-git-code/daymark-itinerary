@@ -1735,7 +1735,7 @@ function cn(...inputs) {
 	return twMerge(clsx(inputs));
 }
 //#endregion
-//#region node_modules/.nitro/vite/services/ssr/assets/app-shell-4jlYCk8G.js
+//#region node_modules/.nitro/vite/services/ssr/assets/app-shell-BECy1Q7E.js
 var __create = Object.create;
 var __defProp$13 = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -6501,67 +6501,74 @@ function AppShell({ children, title, actions }) {
 							}, item.to))
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "ml-auto flex items-center gap-2",
-							children: [trips.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DropdownMenu, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuTrigger, {
-								asChild: true,
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-									variant: "outline",
-									size: "sm",
-									className: "max-w-44 sm:max-w-56",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "truncate",
-										children: trip?.name ?? "Select trip"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronDown, { className: "size-4 opacity-60" })]
+							className: "ml-auto flex flex-wrap items-center justify-end gap-2",
+							children: [
+								trips.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DropdownMenu, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuTrigger, {
+									asChild: true,
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+										variant: "outline",
+										size: "sm",
+										className: "max-w-44 sm:max-w-56",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "truncate",
+											children: trip?.name ?? "Select trip"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronDown, { className: "size-4 opacity-60" })]
+									})
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DropdownMenuContent, {
+									align: "end",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuLabel, { children: "Trips" }),
+										trips.map((t) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuItem, {
+											onClick: () => setActiveTrip(t.id),
+											children: t.name
+										}, t.id)),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuSeparator, {}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DropdownMenuItem, {
+											onClick: () => {
+												setEditingTrip(false);
+												setTripOpen(true);
+											},
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, { className: "size-4" }), " New trip"]
+										}),
+										trip && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuItem, {
+											onClick: () => {
+												setEditingTrip(true);
+												setTripOpen(true);
+											},
+											children: "Edit trip"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuItem, {
+											className: "text-destructive",
+											onClick: () => deleteTrip(trip.id),
+											children: "Delete trip"
+										})] })
+									]
+								})] }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select, {
+									value: homeCurrency,
+									onValueChange: setHomeCurrency,
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectTrigger, {
+										className: "h-9 w-24 px-2 text-xs",
+										"aria-label": "Home currency",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectValue, {})
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectContent, { children: CURRENCIES.map((c) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+										value: c.code,
+										children: c.code
+									}, c.code)) })]
+								}),
+								actions && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "flex flex-wrap items-center gap-2",
+									children: actions
 								})
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DropdownMenuContent, {
-								align: "end",
-								children: [
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuLabel, { children: "Trips" }),
-									trips.map((t) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuItem, {
-										onClick: () => setActiveTrip(t.id),
-										children: t.name
-									}, t.id)),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuSeparator, {}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DropdownMenuItem, {
-										onClick: () => {
-											setEditingTrip(false);
-											setTripOpen(true);
-										},
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, { className: "size-4" }), " New trip"]
-									}),
-									trip && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuItem, {
-										onClick: () => {
-											setEditingTrip(true);
-											setTripOpen(true);
-										},
-										children: "Edit trip"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuItem, {
-										className: "text-destructive",
-										onClick: () => deleteTrip(trip.id),
-										children: "Delete trip"
-									})] })
-								]
-							})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select, {
-								value: homeCurrency,
-								onValueChange: setHomeCurrency,
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectTrigger, {
-									className: "h-9 w-24 px-2 text-xs",
-									"aria-label": "Home currency",
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectValue, {})
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectContent, { children: CURRENCIES.map((c) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
-									value: c.code,
-									children: c.code
-								}, c.code)) })]
-							})]
+							]
 						})
 					]
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", {
 				className: "mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 pt-6 pb-24 sm:px-6 sm:pb-12",
-				children: [title && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "mb-5 flex flex-wrap items-end justify-between gap-3",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+				children: [title && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "mb-5",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 							className: "text-xs tracking-wide text-muted-foreground uppercase",
 							children: trip?.name
@@ -6574,10 +6581,7 @@ function AppShell({ children, title, actions }) {
 							className: "mt-1 text-xs text-muted-foreground",
 							children: [formatRate(rate, trip.currency, homeCurrency), trip.customRate ? " · custom" : ""]
 						})
-					] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "flex flex-wrap gap-2",
-						children: actions
-					})]
+					] })
 				}), children]
 			}),
 			pathname !== "/" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {

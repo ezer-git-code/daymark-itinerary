@@ -1,11 +1,11 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
 import { R as require_jsx_runtime } from "../_libs/@tanstack/react-router+[...].mjs";
-import { a as ITEM_KINDS, d as ViewToolbar, i as EmptyTrip, p as useTripWorkspace, r as Button, t as AppShell, u as TripEditors } from "./app-shell-4jlYCk8G.mjs";
+import { a as ITEM_KINDS, d as ViewToolbar, i as EmptyTrip, p as useTripWorkspace, r as Button, t as AppShell, u as TripEditors } from "./app-shell-BECy1Q7E.mjs";
 import { o as Plus } from "../_libs/lucide-react.mjs";
-import { r as PricePair, t as KindBadge } from "./price-pair-F6FLP4dm.mjs";
+import { r as PricePair, t as KindBadge } from "./price-pair-Dfs0PuDD.mjs";
 import { a as format, n as parseISO } from "../_libs/date-fns.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/board-D8VyF5ru.js
+//#region node_modules/.nitro/vite/services/ssr/assets/board-C8Ozz-Ur.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function BoardPage() {
