@@ -74,7 +74,7 @@ export function AppShell({
 
   return (
     <div className="flex min-h-dvh flex-col bg-background text-foreground">
-      <header className="sticky top-0 z-30 border-b border-border/80 bg-background/90 backdrop-blur-sm">
+      <header className="border-b border-border/80 bg-background/90">
         <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 sm:px-6">
           <Link
             to="/"
@@ -164,12 +164,15 @@ export function AppShell({
             </Select>
           </div>
         </div>
-        {actions && (
-          <div className="mx-auto flex max-w-6xl justify-end px-4 pb-3 sm:px-6">
+      </header>
+
+      {actions && (
+        <div className="sticky top-0 z-30 border-b border-border/80 bg-background/95 py-3 backdrop-blur-sm">
+          <div className="mx-auto flex max-w-6xl justify-end px-4 sm:px-6">
             <div className="flex flex-row flex-nowrap justify-end gap-2">{actions}</div>
           </div>
-        )}
-      </header>
+        </div>
+      )}
 
       <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 pt-6 pb-24 sm:px-6 sm:pb-12">
         {title && (
