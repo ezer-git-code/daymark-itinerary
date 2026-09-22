@@ -164,11 +164,16 @@ export function AppShell({
             </Select>
           </div>
         </div>
+        {actions && (
+          <div className="mx-auto flex max-w-6xl justify-end px-4 pb-3 sm:px-6">
+            <div className="flex flex-wrap justify-end gap-2">{actions}</div>
+          </div>
+        )}
       </header>
 
       <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 pt-6 pb-24 sm:px-6 sm:pb-12">
         {title && (
-          <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
+          <div className="mb-5">
             <div>
               <p className="text-xs tracking-wide text-muted-foreground uppercase">
                 {trip?.name}
@@ -183,7 +188,6 @@ export function AppShell({
                 </p>
               )}
             </div>
-            <div className="flex flex-wrap gap-2">{actions}</div>
           </div>
         )}
         {children}
