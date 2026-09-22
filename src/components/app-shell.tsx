@@ -166,7 +166,7 @@ export function AppShell({
         </div>
         {actions && (
           <div className="mx-auto flex max-w-6xl justify-end px-4 pb-3 sm:px-6">
-            <div className="flex flex-wrap justify-end gap-2">{actions}</div>
+            <div className="flex flex-row flex-nowrap justify-end gap-2">{actions}</div>
           </div>
         )}
       </header>
