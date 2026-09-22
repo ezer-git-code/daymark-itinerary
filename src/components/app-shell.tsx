@@ -253,10 +253,10 @@ export function ViewToolbar({
 }) {
   return (
     <>
-      <Button variant="outline" onClick={onAddLocation}>
+      <Button variant="outline" size="sm" onClick={onAddLocation}>
         <Plus /> Location
       </Button>
-      <Button onClick={onAddItem} disabled={!canAddItem}>
+      <Button size="sm" onClick={onAddItem} disabled={!canAddItem}>
         <Plus /> Item
       </Button>
     </>
