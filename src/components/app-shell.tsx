@@ -101,72 +101,74 @@ export function AppShell({
               ))}
             </nav>
           )}
-          <div className="ml-auto flex flex-col items-end gap-1">
-            <div className="flex items-center gap-2">
-              {trips.length > 0 && (
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="outline" size="sm" className="max-w-44 sm:max-w-56">
-                      <span className="truncate">
-                        {trip?.name ?? "Select trip"}
-                      </span>
-                      <ChevronDown className="size-4 opacity-60" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>Trips</DropdownMenuLabel>
-                    {trips.map((t) => (
-                      <DropdownMenuItem
-                        key={t.id}
-                        onClick={() => setActiveTrip(t.id)}
-                      >
-                        {t.name}
-                      </DropdownMenuItem>
-                    ))}
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={() => { setEditingTrip(false); setTripOpen(true); }}>
-                      <Plus className="size-4" /> New trip
+          <div className="ml-auto flex items-center gap-2">
+            {trips.length > 0 && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="sm" className="max-w-44 sm:max-w-56">
+                    <span className="truncate">
+                      {trip?.name ?? "Select trip"}
+                    </span>
+                    <ChevronDown className="size-4 opacity-60" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>Trips</DropdownMenuLabel>
+                  {trips.map((t) => (
+                    <DropdownMenuItem
+                      key={t.id}
+                      onClick={() => setActiveTrip(t.id)}
+                    >
+                      {t.name}
                     </DropdownMenuItem>
-                    {trip && (
-                      <>
-                        <DropdownMenuItem
-                          onClick={() => {
-                            setEditingTrip(true);
-                            setTripOpen(true);
-                          }}
-                        >
-                          Edit trip
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          className="text-destructive"
-                          onClick={() => deleteTrip(trip.id)}
-                        >
-                          Delete trip
-                        </DropdownMenuItem>
-                      </>
-                    )}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              )}
-              <Select value={homeCurrency} onValueChange={setHomeCurrency}>
-                <SelectTrigger
-                  className="h-9 w-24 px-2 text-xs"
-                  aria-label="Home currency"
-                >
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {CURRENCIES.map((c) => (
-                    <SelectItem key={c.code} value={c.code}>
-                      {c.code}
-                    </SelectItem>
                   ))}
-                </SelectContent>
-              </Select>
-            </div>
-            {actions && <div className="flex items-center gap-1">{actions}</div>}
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => { setEditingTrip(false); setTripOpen(true); }}>
+                    <Plus className="size-4" /> New trip
+                  </DropdownMenuItem>
+                  {trip && (
+                    <>
+                      <DropdownMenuItem
+                        onClick={() => {
+                          setEditingTrip(true);
+                          setTripOpen(true);
+                        }}
+                      >
+                        Edit trip
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        className="text-destructive"
+                        onClick={() => deleteTrip(trip.id)}
+                      >
+                        Delete trip
+                      </DropdownMenuItem>
+                    </>
+                  )}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
+            <Select value={homeCurrency} onValueChange={setHomeCurrency}>
+              <SelectTrigger
+                className="h-9 w-24 px-2 text-xs"
+                aria-label="Home currency"
+              >
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {CURRENCIES.map((c) => (
+                  <SelectItem key={c.code} value={c.code}>
+                    {c.code}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
         </div>
+        {actions && (
+          <div className="mx-auto flex max-w-6xl justify-end px-4 pb-3 sm:px-6">
+            <div className="flex flex-wrap justify-end gap-2">{actions}</div>
+          </div>
+        )}
       </header>
 
       <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 pt-6 pb-24 sm:px-6 sm:pb-12">
