@@ -162,7 +162,7 @@ export function AppShell({
                 ))}
               </SelectContent>
             </Select>
-            {actions && <div className="flex flex-col gap-1">{actions}</div>}
+            {actions && <div className="flex flex-wrap gap-1">{actions}</div>}
           </div>
         </div>
       </header>
