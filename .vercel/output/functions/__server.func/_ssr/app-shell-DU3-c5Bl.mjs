@@ -1735,7 +1735,7 @@ function cn(...inputs) {
 	return twMerge(clsx(inputs));
 }
 //#endregion
-//#region node_modules/.nitro/vite/services/ssr/assets/app-shell-BECy1Q7E.js
+//#region node_modules/.nitro/vite/services/ssr/assets/app-shell-DU3-c5Bl.js
 var __create = Object.create;
 var __defProp$13 = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -6556,7 +6556,7 @@ function AppShell({ children, title, actions }) {
 									}, c.code)) })]
 								}),
 								actions && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-									className: "flex flex-wrap items-center gap-2",
+									className: "flex flex-col gap-1",
 									children: actions
 								})
 							]
@@ -6621,9 +6621,11 @@ function navCls(active) {
 function ViewToolbar({ onAddLocation, onAddItem, canAddItem }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
 		variant: "outline",
+		size: "sm",
 		onClick: onAddLocation,
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, {}), " Location"]
 	}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+		size: "sm",
 		onClick: onAddItem,
 		disabled: !canAddItem,
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, {}), " Item"]

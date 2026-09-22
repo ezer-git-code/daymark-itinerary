@@ -1,10 +1,10 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
 import { R as require_jsx_runtime } from "../_libs/@tanstack/react-router+[...].mjs";
-import { i as EmptyTrip, p as useTripWorkspace, r as Button, t as AppShell, u as TripEditors } from "./app-shell-BECy1Q7E.mjs";
+import { i as EmptyTrip, p as useTripWorkspace, r as Button, t as AppShell, u as TripEditors } from "./app-shell-DU3-c5Bl.mjs";
 import { b as BookOpen, s as Pencil, u as Image } from "../_libs/lucide-react.mjs";
 import { a as format, n as parseISO } from "../_libs/date-fns.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/journal-zhxBRsgs.js
+//#region node_modules/.nitro/vite/services/ssr/assets/journal-Dy0UR0A_.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function JournalPage() {
