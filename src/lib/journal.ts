@@ -51,3 +51,30 @@ export function getEntriesGrouped() {
 
   return { byDay, byLocation };
 }
+
+// Journal helper
+import type { Location, TripItem } from "./types";
+
+export function journalToMarkdown(
+  items: TripItem[],
+  locations: Location[],
+): string {
+  return items
+    .filter((item) => item.notes.trim() || item.images.length > 0)
+    .map((item) => {
+      const location = locations.find((entry) => entry.id === item.locationId);
+      const lines = [
+        `## ${item.title}`,
+        "",
+        `**Date:** ${item.date}`,
+        location ? `**Location:** ${location.name}` : "",
+        "",
+        item.notes,
+        "",
+        ...item.images.map((image) => `![${item.title}](${image})`),
+      ];
+
+      return lines.filter(Boolean).join("\n");
+    })
+    .join("\n\n");
+}
