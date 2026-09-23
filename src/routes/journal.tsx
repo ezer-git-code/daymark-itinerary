@@ -17,9 +17,7 @@ function JournalPage() {
   const w = useTripWorkspace();
   const [itemOpen, setItemOpen] = useState(false);
   const [editingItemId, setEditingItemId] = useState<string | null>(null);
-  const journalItems = w.items.filter(
-  (item) => item.notes.trim() || item.images.length > 0,
-);
+  const journalItems = w.items.filter(item => (item.notes ?? "").trim() !== "");
 
   function editItem(id: string) {
     setEditingItemId(id);
