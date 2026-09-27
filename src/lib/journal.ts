@@ -1,3 +1,6 @@
+import { format, parseISO } from "date-fns";
+import type { Location, TripItem } from "./types";
+
 export type JournalEntryData = {
   notes: string;
   images: string[];
@@ -31,7 +34,9 @@ export function saveJournalEntry(entry: unknown) {
 }
 
 export function getEntriesByItem(itemId: string) {
-  return getJournalEntries().filter((e) => (e as { itinerary_item_id?: string }).itinerary_item_id === itemId);
+  return getJournalEntries().filter(
+    (e) => (e as { itinerary_item_id?: string }).itinerary_item_id === itemId,
+  );
 }
 
 export function getEntriesGrouped() {
@@ -52,29 +57,45 @@ export function getEntriesGrouped() {
   return { byDay, byLocation };
 }
 
-// Journal helper
-import type { Location, TripItem } from "./types";
+/**
+ * Shared date formatter for journal cards. Falls back to the raw string when
+ * `date` is not a parseable ISO date (legacy rehydrated data).
+ */
+export function formatJournalDate(date: string): string {
+  const parsed = parseISO(date);
+  return Number.isNaN(parsed.getTime()) ? date : format(parsed, "EEE d MMM yyyy");
+}
 
-export function journalToMarkdown(
-  items: TripItem[],
-  locations: Location[],
-): string {
-  return items
-    .filter((item) => item.notes.trim() || item.images.length > 0)
+/**
+ * Render journal-worthy items as a Markdown document. An item is included when
+ * it has non-empty notes or at least one photo — matching the journal page.
+ */
+export function journalToMarkdown(items: TripItem[], locations: Location[]): string {
+  const entries = items
+    .filter((item) => (item.notes ?? "").trim() !== "" || (item.images ?? []).length > 0)
     .map((item) => {
-      const location = locations.find((entry) => entry.id === item.locationId);
-      const lines = [
-        `## ${item.title}`,
-        "",
-        `**Date:** ${item.date}`,
-        location ? `**Location:** ${location.name}` : "",
-        "",
-        item.notes,
-        "",
-        ...item.images.map((image) => `![${item.title}](${image})`),
-      ];
+      const location = locations.find((candidate) => candidate.id === item.locationId);
+      const date = formatJournalDate(item.date);
+      const lines = [`## ${item.title}`, `**${date}**`];
 
-      return lines.filter(Boolean).join("\n");
-    })
-    .join("\n\n");
+      if (location) {
+        lines.push(`**Location:** ${location.name}`);
+      }
+
+      if ((item.notes ?? "").trim()) {
+        lines.push("", (item.notes ?? "").trim());
+      }
+
+      const images = item.images ?? [];
+      if (images.length > 0) {
+        lines.push(
+          "",
+          ...images.map((image, index) => `![${item.title} journal photo ${index + 1}](${image})`),
+        );
+      }
+
+      return lines.join("\n");
+    });
+
+  return `# Journal\n\n${entries.join("\n\n")}${entries.length ? "\n" : ""}`;
 }

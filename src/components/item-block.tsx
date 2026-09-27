@@ -1,6 +1,7 @@
 import { format, parseISO } from "date-fns";
 import { Image as ImageIcon, Pencil, Trash2 } from "lucide-react";
 import { KindBadge, KindIcon } from "@/components/kind-badge";
+import { MarkdownNotes } from "@/components/markdown-notes";
 import { PricePair } from "@/components/price-pair";
 import { Button } from "@/components/ui/button";
 import type { Location, TripItem } from "@/lib/types";
@@ -91,11 +92,7 @@ export function ItemBlock({
           </div>
           {(notes || images.length > 0) && (
             <div className="mt-3 rounded-md border border-border/70 bg-muted/20 p-3">
-              {notes && (
-                <p className="whitespace-pre-wrap text-sm text-foreground/90">
-                  {notes}
-                </p>
-              )}
+              {notes && <MarkdownNotes text={notes} className="text-sm text-foreground/90" />}
               {images.length > 0 && (
                 <div className="mt-3 grid gap-2 sm:grid-cols-2">
                   {images.map((image, index) => (

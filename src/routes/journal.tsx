@@ -1,15 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { format, parseISO } from "date-fns";
 import { BookOpen, Image as ImageIcon, Pencil } from "lucide-react";
 import { useState } from "react";
-import {
-  AppShell,
-  EmptyTrip,
-  TripEditors,
-  useTripWorkspace,
-} from "@/components/app-shell";
+import { AppShell, EmptyTrip, TripEditors, useTripWorkspace } from "@/components/app-shell";
+import { MarkdownNotes } from "@/components/markdown-notes";
 import { Button } from "@/components/ui/button";
-import { TripItem, Location } from "@/lib/types";
+import { formatJournalDate, journalToMarkdown } from "@/lib/journal";
 
 export const Route = createFileRoute("/journal")({ component: JournalPage });
 
@@ -17,7 +12,9 @@ function JournalPage() {
   const w = useTripWorkspace();
   const [itemOpen, setItemOpen] = useState(false);
   const [editingItemId, setEditingItemId] = useState<string | null>(null);
-  const journalItems = w.items.filter(item => (item.notes ?? "").trim() !== "");
+  const journalItems = w.items.filter(
+    (item) => (item.notes ?? "").trim() !== "" || (item.images ?? []).length > 0,
+  );
 
   function editItem(id: string) {
     setEditingItemId(id);
@@ -26,29 +23,29 @@ function JournalPage() {
 
   //Export journal to markdown file
   function exportMarkdown() {
-  const markdown = journalToMarkdown(journalItems, w.locations);
-  const blob = new Blob([markdown], {
-    type: "text/markdown;charset=utf-8",
-  });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
+    const markdown = journalToMarkdown(journalItems, w.locations);
+    const blob = new Blob([markdown], {
+      type: "text/markdown;charset=utf-8",
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
 
-  link.href = url;
-  link.download = `${w.trip?.name ?? "journal"}.md`;
-  link.click();
+    link.href = url;
+    link.download = `${w.trip?.name ?? "journal"}.md`;
+    link.click();
 
-  URL.revokeObjectURL(url);
-}
+    URL.revokeObjectURL(url);
+  }
 
   return (
-    <AppShell 
+    <AppShell
       title="Journal"
       actions={
         <Button variant="outline" onClick={exportMarkdown}>
           Export Markdown
         </Button>
       }
-      >
+    >
       {!w.trip ? (
         <EmptyTrip />
       ) : journalItems.length === 0 ? (
@@ -62,20 +59,15 @@ function JournalPage() {
       ) : (
         <div className="grid gap-4 md:grid-cols-2">
           {journalItems.map((item) => {
-            const location = w.locations.find(
-              (candidate) => candidate.id === item.locationId,
-            );
-            
+            const location = w.locations.find((candidate) => candidate.id === item.locationId);
+
             return (
-              <article
-                key={item.id}
-                className="rounded-xl bg-card p-5 shadow-card"
-              >
+              <article key={item.id} className="rounded-xl bg-card p-5 shadow-card">
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="text-sm text-muted-foreground">
-                      {item.date}
-                      {location ? ` · ${location}` : ""}
+                      {formatJournalDate(item.date)}
+                      {location ? ` · ${location.name}` : ""}
                     </p>
                     <h2 className="mt-1 font-display text-2xl font-medium tracking-tight">
                       {item.title}
@@ -95,9 +87,10 @@ function JournalPage() {
                   )}
                 </div>
                 {item.notes && (
-                  <p className="mt-4 whitespace-pre-wrap text-sm leading-6 text-foreground/90">
-                    {item.notes}
-                  </p>
+                  <MarkdownNotes
+                    text={item.notes}
+                    className="mt-4 text-sm leading-6 text-foreground/90"
+                  />
                 )}
                 {item.images.length > 0 && (
                   <div className="mt-4 grid grid-cols-2 gap-2">
@@ -133,37 +126,3 @@ function JournalPage() {
     </AppShell>
   );
 }
-function journalToMarkdown(journalItems: TripItem[], locations: Location[]) {
-  const entries = journalItems.map((item) => {
-    const location = locations.find(
-      (candidate) => candidate.id === item.locationId,
-    );
-    const parsedDate = parseISO(item.date);
-    const date = Number.isNaN(parsedDate.getTime())
-      ? item.date
-      : format(parsedDate, "MMMM d, yyyy");
-    const lines = [`## ${item.title}`, `**${date}**`];
-
-    if (location) {
-      lines.push(`**Location:** ${location.name}`);
-    }
-
-    if (item.notes.trim()) {
-      lines.push("", item.notes.trim());
-    }
-
-    if (item.images.length > 0) {
-      lines.push(
-        "",
-        ...item.images.map((image, index) =>
-          `![${item.title} journal photo ${index + 1}](${image})`,
-        ),
-      );
-    }
-
-    return lines.join("\n");
-  });
-
-  return `# Journal\n\n${entries.join("\n\n")}${entries.length ? "\n" : ""}`;
-}
-
