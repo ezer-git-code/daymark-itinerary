@@ -76,10 +76,7 @@ export function AppShell({
     <div className="flex min-h-dvh flex-col bg-background text-foreground">
       <header className="border-b border-border/80 bg-background/90">
         <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 sm:px-6">
-          <Link
-            to="/"
-            className="font-display text-xl tracking-tight text-foreground"
-          >
+          <Link to="/" className="font-display text-xl tracking-tight text-foreground">
             Daymark
           </Link>
           {pathname !== "/" && (
@@ -106,24 +103,24 @@ export function AppShell({
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="outline" size="sm" className="max-w-44 sm:max-w-56">
-                    <span className="truncate">
-                      {trip?.name ?? "Select trip"}
-                    </span>
+                    <span className="truncate">{trip?.name ?? "Select trip"}</span>
                     <ChevronDown className="size-4 opacity-60" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuLabel>Trips</DropdownMenuLabel>
                   {trips.map((t) => (
-                    <DropdownMenuItem
-                      key={t.id}
-                      onClick={() => setActiveTrip(t.id)}
-                    >
+                    <DropdownMenuItem key={t.id} onClick={() => setActiveTrip(t.id)}>
                       {t.name}
                     </DropdownMenuItem>
                   ))}
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => { setEditingTrip(false); setTripOpen(true); }}>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      setEditingTrip(false);
+                      setTripOpen(true);
+                    }}
+                  >
                     <Plus className="size-4" /> New trip
                   </DropdownMenuItem>
                   {trip && (
@@ -148,10 +145,7 @@ export function AppShell({
               </DropdownMenu>
             )}
             <Select value={homeCurrency} onValueChange={setHomeCurrency}>
-              <SelectTrigger
-                className="h-9 w-24 px-2 text-xs"
-                aria-label="Home currency"
-              >
+              <SelectTrigger className="h-9 w-24 px-2 text-xs" aria-label="Home currency">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -178,12 +172,8 @@ export function AppShell({
         {title && (
           <div className="mb-5">
             <div>
-              <p className="text-xs tracking-wide text-muted-foreground uppercase">
-                {trip?.name}
-              </p>
-              <h1 className="font-display text-3xl font-medium tracking-tight">
-                {title}
-              </h1>
+              <p className="text-xs tracking-wide text-muted-foreground uppercase">{trip?.name}</p>
+              <h1 className="font-display text-3xl font-medium tracking-tight">{title}</h1>
               {trip && rate != null && (
                 <p className="mt-1 text-xs text-muted-foreground">
                   {formatRate(rate, trip.currency, homeCurrency)}
@@ -290,6 +280,7 @@ export function useTripWorkspace() {
   const addItem = useAppStore((s) => s.addItem);
   const updateItem = useAppStore((s) => s.updateItem);
   const deleteItem = useAppStore((s) => s.deleteItem);
+  const moveItem = useAppStore((s) => s.moveItem);
 
   return {
     trip,
@@ -305,6 +296,7 @@ export function useTripWorkspace() {
     addItem,
     updateItem,
     deleteItem,
+    moveItem,
   };
 }
 
@@ -379,9 +371,7 @@ export function EmptyTrip({
   const trip = useActiveTrip();
   return (
     <div className="flex flex-1 flex-col items-center justify-center rounded-xl bg-card px-6 py-16 text-center shadow-card">
-      <p className="font-display text-2xl">
-        {trip ? "No locations yet" : "No trips yet"}
-      </p>
+      <p className="font-display text-2xl">{trip ? "No locations yet" : "No trips yet"}</p>
       <p className="mt-2 max-w-sm text-sm text-muted-foreground">
         {trip
           ? "Add a dated location, then list experiences, food, and things to buy."

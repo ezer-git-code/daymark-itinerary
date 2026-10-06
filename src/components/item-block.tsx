@@ -1,5 +1,6 @@
 import { format, parseISO } from "date-fns";
 import { Image as ImageIcon, Pencil, Trash2 } from "lucide-react";
+import type { ReactNode } from "react";
 import { KindBadge, KindIcon } from "@/components/kind-badge";
 import { MarkdownNotes } from "@/components/markdown-notes";
 import { PricePair } from "@/components/price-pair";
@@ -18,6 +19,7 @@ export function ItemBlock({
   onDelete,
   dense,
   accentClassName,
+  dragHandle,
 }: {
   item: TripItem;
   location?: Location;
@@ -29,6 +31,8 @@ export function ItemBlock({
   onDelete: () => void;
   dense?: boolean;
   accentClassName?: string;
+  /** Drag handle node from DraggableItem, rendered before the title. */
+  dragHandle?: ReactNode;
 }) {
   const notes = item.notes ?? "";
   const images = Array.isArray(item.images) ? item.images : [];
@@ -45,6 +49,7 @@ export function ItemBlock({
         <span className="mt-0.5 hidden text-primary sm:block">
           <KindIcon kind={item.kind} />
         </span>
+        {dragHandle && <span className="mt-0.5 shrink-0">{dragHandle}</span>}
         <div className="min-w-0 flex-1">
           <div className="flex items-start justify-between gap-2">
             <div className="min-w-0">
