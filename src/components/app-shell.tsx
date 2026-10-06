@@ -75,9 +75,16 @@ export function AppShell({
   return (
     <div className="flex min-h-dvh flex-col bg-background text-foreground">
       <header className="border-b border-border/80 bg-background/90">
-        <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 sm:px-6">
-          <Link to="/" className="font-display text-xl tracking-tight text-foreground">
-            Daymark
+        <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 sm:px-6">          <Link
+            to="/"
+            className="flex flex-col leading-tight"
+          >
+            <span className="font-display text-xl tracking-tight text-foreground">
+              Voyant
+            </span>
+            <span className="text-[0.6875rem] font-medium tracking-wide text-muted-foreground">
+              Travel planning made clear
+            </span>
           </Link>
           {pathname !== "/" && (
             <nav className="ml-4 hidden items-center gap-1 sm:flex" aria-label="Views">

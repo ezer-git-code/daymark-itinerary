@@ -178,7 +178,7 @@ export const useAppStore = create<AppState>()(
         })),
     }),
     {
-      name: "daymark-v1",
+      name: "voyant-v1",
       skipHydration: true,
       storage: createJSONStorage(() => {
         if (typeof window === "undefined") {

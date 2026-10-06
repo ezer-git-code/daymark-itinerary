@@ -38,8 +38,9 @@ export function HydrateGate({ children }: { children: ReactNode }) {
 
   if (!ready) {
     return (
-      <div className="flex min-h-dvh items-center justify-center bg-background text-foreground">
-        <p className="font-display text-3xl tracking-tight">Daymark</p>
+      <div className="flex min-h-dvh flex-col items-center justify-center gap-1 bg-background text-foreground">
+        <p className="font-display text-3xl tracking-tight">Voyant</p>
+        <p className="text-sm text-muted-foreground">Travel planning made clear</p>
       </div>
     );
   }
