@@ -11,11 +11,11 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Voyant — Travel planning made clear" },
+      { title: "Daymark Itinerary" },
       {
         name: "description",
         content:
-          "Voyant: travel planning made clear. A dated travel ledger — locations, experiences, food, and things to buy — with live conversion to home currency.",
+          "Daymark is a travel planning app that helps you create and organize your itineraries — with locations, experiences, food, and things to buy, plus live conversion to your home currency.",
       },
       { name: "theme-color", content: "#2F4F4F" },
     ],
@@ -23,7 +23,7 @@ export const Route = createRootRoute({
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "stylesheet", href: appCss },
       { rel: "manifest", href: "/manifest.json" },
-      { rel: "apple-touch-icon", href: "/icons/voyant-icon-512.png" },
+      { rel: "apple-touch-icon", href: "/icons/daymark-icon-512.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {

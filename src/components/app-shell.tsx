@@ -78,12 +78,11 @@ export function AppShell({
         <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 sm:px-6">          <Link
             to="/"
             className="flex flex-col leading-tight"
-          >
-            <span className="font-display text-xl tracking-tight text-foreground">
-              Voyant
+          >              <span className="font-display text-xl tracking-tight text-foreground">
+              Daymark
             </span>
             <span className="text-[0.6875rem] font-medium tracking-wide text-muted-foreground">
-              Travel planning made clear
+              A travel planning app that helps you create and organize your itineraries
             </span>
           </Link>
           {pathname !== "/" && (

@@ -23,14 +23,14 @@ export function normalizeJournalData(
 
 // Backwards-compat helpers for the legacy journal store.
 export function getJournalEntries(): unknown[] {
-  const raw = localStorage.getItem("voyant_journal");
+  const raw = localStorage.getItem("daymark_journal");
   return raw ? JSON.parse(raw) : [];
 }
 
 export function saveJournalEntry(entry: unknown) {
   const entries = getJournalEntries();
   entries.push(entry);
-  localStorage.setItem("voyant_journal", JSON.stringify(entries));
+  localStorage.setItem("daymark_journal", JSON.stringify(entries));
 }
 
 export function getEntriesByItem(itemId: string) {
