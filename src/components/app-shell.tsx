@@ -82,7 +82,7 @@ export function AppShell({
               Daymark
             </span>
             <span className="text-[0.6875rem] font-medium tracking-wide text-muted-foreground">
-              A travel planning app that helps you create and organize your itineraries
+              Travel planning made clear
             </span>
           </Link>
           {pathname !== "/" && (
