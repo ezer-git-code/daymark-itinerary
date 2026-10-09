@@ -13,6 +13,8 @@ import {
 import { KindBadge } from "@/components/kind-badge";
 import { PricePair } from "@/components/price-pair";
 import { Button } from "@/components/ui/button";
+import { formatMoney } from "@/lib/money";
+import { sumLocal } from "@/lib/store";
 import { ITEM_KINDS } from "@/lib/types";
 import type { ItemKind } from "@/lib/types";
 
@@ -56,6 +58,8 @@ function BoardPage() {
           <div className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6">
             {w.locations.map((loc) => {
               const locItems = w.items.filter((i) => i.locationId === loc.id);
+              const actualTotal = sumLocal(locItems, "actualLocal");
+              const estimatedTotal = sumLocal(locItems, "estimatedLocal");
               return (
                 <section
                   key={loc.id}
@@ -68,7 +72,19 @@ function BoardPage() {
                         ? ` - ${format(parseISO(loc.endDate), "EEE d MMM")}`
                         : ""}
                     </p>
-                    <h2 className="font-display text-xl font-medium tracking-tight">{loc.name}</h2>
+                    <div className="flex items-start justify-between gap-3">
+                      <h2 className="min-w-0 font-display text-xl font-medium tracking-tight">
+                        {loc.name}
+                      </h2>
+                      <div className="shrink-0 text-right tabular-nums">
+                        <p className="font-semibold text-foreground">
+                          {formatMoney(actualTotal, w.trip!.currency)}
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          Est. {formatMoney(estimatedTotal, w.trip!.currency, { compact: true })}
+                        </p>
+                      </div>
+                    </div>
                     <div className="mt-1 flex gap-2">
                       <button
                         type="button"
