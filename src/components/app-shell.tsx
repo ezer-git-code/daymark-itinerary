@@ -38,6 +38,8 @@ import {
   useTripLocations,
 } from "@/lib/store";
 import { cn } from "@/lib/utils";
+import { useEffect, useRef } from "react";
+import { registerSW } from "virtual:pwa-register";
 
 const NAV = [
   { to: "/list", label: "List", icon: List },
@@ -46,6 +48,47 @@ const NAV = [
   { to: "/items", label: "Items", icon: ClipboardList },
   { to: "/journal", label: "Journal", icon: BookOpen },
 ] as const;
+
+function useOffline() {
+  const online = useAppStore((s) => s.isOnline);
+  return online;
+}
+
+function OfflineBanner() {
+  const online = useOffline();
+  if (online) return null;
+  return (
+    <div
+      className="mx-auto max-w-6xl text-center text-sm text-foreground/80"
+      role="status"
+      aria-live="polite"
+    >
+      You're offline — the current trip is still available locally.
+    </div>
+  );
+}
+
+function useRegisterSW() {
+  // Defer the SW registration to the client so the call to `useEffect` never
+  // runs during SSR, when @dnd-kit/accessibility's CJS React shim still has
+  // ReactSharedInternals.H == null and would throw on `useEffect(...)`.
+  const done = useRef(false);
+  useEffect(() => {
+    if (done.current) return;
+    done.current = true;
+    if (typeof window === "undefined" || !window.navigator?.serviceWorker) return;
+    const update = registerSW({
+      immediate: true,
+      onOfflineReady: () => {
+        console.info("[daymark] offline app shell is ready");
+      },
+      onRegisterError: (error) => {
+        console.error("[daymark] service worker registration failed", error);
+      },
+    });
+    void update;
+  }, []);
+}
 
 export function AppShell({
   children,
@@ -56,6 +99,7 @@ export function AppShell({
   title?: string;
   actions?: React.ReactNode;
 }) {
+  useRegisterSW();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const trip = useActiveTrip();
   const trips = useAppStore((s) => s.trips);
@@ -74,6 +118,7 @@ export function AppShell({
 
   return (
     <div className="flex min-h-dvh flex-col bg-background text-foreground">
+      <OfflineBanner />
       <header className="border-b border-border/80 bg-background/90">
         <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 sm:px-6">          <Link
             to="/"

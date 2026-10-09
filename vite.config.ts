@@ -10,6 +10,7 @@ import { nitro } from "nitro/vite";
 import { grokPwaPlugin } from "./scripts/grok-pwa-plugin.mjs";
 // @ts-expect-error JS plugin alongside the TS vite config
 import { appEnvPlugin } from "./scripts/app-env-plugin.mjs";
+import { VitePWA } from "vite-plugin-pwa";
 import { isMigrationFile } from "./scripts/migration-plan.mjs";
 
 /** The files `src/lib/db.ts` globs — same directory, same non-recursive scope. */
@@ -167,7 +168,9 @@ export default defineConfig(({ command, isPreview }) => ({
     port: 8081,
     strictPort: true,
   },
-  resolve: { tsconfigPaths: true },
+  resolve: {
+    tsconfigPaths: true,
+  },
   plugins: [
     pgliteBootstrapPlugin(),
     // Before tanstackStart so /auth/popup never falls through to the SPA.
@@ -176,6 +179,74 @@ export default defineConfig(({ command, isPreview }) => ({
     appEnvPlugin(),
     // PWA head + ?install=1 tutorial page; runs before Start/Nitro.
     grokPwaPlugin(),
+
+    // App-shell-first offline: cache the SPA shell, fonts, and public icons.
+    // App data is local (localStorage + PGLite), so there are no remote API
+    // calls to backfill — the SW's job is to keep the shell alive on flaky/
+    // offline connections and to let the platform error paths handle anything
+    // else.
+    VitePWA({
+      registerType: "autoUpdate",
+      srcDir: "public",
+      filename: "sw.js",
+      injectRegister: false,
+      manifest: {
+        name: "Daymark Itinerary",
+        short_name: "Daymark",
+        description:
+          "Daymark is a travel planning app that helps you create and organize your itineraries.",
+        theme_color: "#0d0d0d",
+        background_color: "#0d0d0d",
+        display: "standalone",
+        orientation: "portrait",
+        start_url: "/",
+        icons: [
+          { src: "/icons/daymark-icon-192.png", sizes: "192x192", type: "image/png" },
+          { src: "/icons/daymark-icon-512.png", sizes: "512x512", type: "image/png" },
+        ],
+      },
+      workbox: {
+        // TanStack Start's production document is server-rendered and emitted
+        // by Nitro into Vercel's static tree, not as dist/index.html.
+        globDirectory: ".vercel/output/static",
+        navigateFallback: "/",
+        navigateFallbackDenylist: [/^\/_/, /^\/api\//],
+        globPatterns: [
+          "assets/**/*.{js,css,svg,png,ico,woff2,woff,ttf}",
+          "icons/**/*.{svg,png,ico}",
+          "favicon.svg",
+          "manifest.webmanifest",
+        ],
+        templatedURLs: {
+          "/": ["assets/**/*.{js,css}"],
+        },
+        runtimeCaching: [
+          {
+            // Fonts and font CDN should resolve once and then stay cached.
+            urlPattern: /^https:\/\/fonts\.(googleapis|gstatic)\.com\/.*/i,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "google-fonts-stylesheets",
+              expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 * 365 },
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+          {
+            urlPattern: /\.(woff2?|ttf|otf|eot)$/i,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "fonts",
+              expiration: { maxEntries: 20, maxAgeSeconds: 60 * 60 * 24 * 365 },
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+        ],
+        cleanupOutdatedCaches: true,
+        clientsClaim: true,
+        skipWaiting: true,
+      },
+      devOptions: { enabled: true, type: "module" },
+    }),
     tailwindcss(),
     tanstackStart(),
     ...(command === "build" || isPreview

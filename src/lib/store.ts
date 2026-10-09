@@ -14,11 +14,13 @@ export type AppState = {
   locations: Location[];
   items: TripItem[];
   activeTripId: string | null;
+  isOnline: boolean;
 
   setHomeCurrency: (code: string) => void;
   fetchRates: () => Promise<void>;
   setActiveTrip: (id: string | null) => void;
   loadSample: () => void;
+  setIsOnline: (online: boolean) => void;
 
   addTrip: (trip: Omit<Trip, "id">) => string;
   updateTrip: (id: string, patch: Partial<Trip>) => void;
@@ -50,11 +52,14 @@ export const useAppStore = create<AppState>()(
       locations: [],
       items: [],
       activeTripId: null,
+      isOnline: typeof navigator !== "undefined" ? navigator.onLine : true,
 
       setHomeCurrency: (code) => {
         set({ homeCurrency: code });
         void get().fetchRates();
       },
+
+      setIsOnline: (online) => set({ isOnline: online }),
 
       fetchRates: async () => {
         const home = get().homeCurrency;
@@ -82,6 +87,7 @@ export const useAppStore = create<AppState>()(
           activeTripId: trip.id,
         }));
       },
+
 
       addTrip: (trip) => {
         const id = nid();
