@@ -19,7 +19,14 @@ export function sampleTrip(): {
   };
 
   const locations: Location[] = [
-    { id: "loc-gion", tripId: TRIP_ID, name: "Gion", date: "2026-04-12", sortOrder: 0 },
+    {
+      id: "loc-gion",
+      tripId: TRIP_ID,
+      name: "Gion",
+      date: "2026-04-12",
+      endDate: "2026-04-15",
+      sortOrder: 0,
+    },
     {
       id: "loc-fushimi",
       tripId: TRIP_ID,
