@@ -1,14 +1,14 @@
 ---
 name: match-vercel-ui-local
-description: 'Match a Vercel or deployed UI to the local host view. Use when comparing production and local frontend routes, reproducing visual differences, aligning layout or styling, or validating that a local UI change matches the deployed app.'
+description: 'Compare a Vercel or deployed UI with the updated local app. Use when checking production against local, matching a deployed route to local, or investigating visual drift. Treat local as the source of truth unless the user says otherwise.'
 argument-hint: 'Route or feature to compare, plus the local and deployed URLs if available'
 user-invocable: true
 disable-model-invocation: false
 ---
 
-# Match Vercel UI to Local View
+# Match Deployed UI to Updated Local View
 
-Align a local frontend route with its Vercel or deployed counterpart while preserving behavior, data contracts, and the existing design system.
+Compare a Vercel or deployed frontend with its updated local counterpart. The local app is canonical: use it to identify what the deployed app should look like, and never regress local code just to reproduce an older deployed state unless the user explicitly changes that priority.
 
 ## When to Use
 
@@ -18,35 +18,37 @@ Use this skill when:
 - a user asks to "match Vercel UI", "make local look like production", or compare a deployed route with localhost;
 - a route has visual regressions involving spacing, typography, colors, borders, responsive layout, or controls;
 - the target behavior is visible in a shared browser page or can be reached from a supplied URL.
+- the local app has newer changes and the deployed app needs to be checked against them.
 
 ## Procedure
 
-1. **Establish the comparison.** Identify the exact route, the local URL, and the deployed/Vercel URL. If only one URL is available, inspect the current workspace and use the closest equivalent route. Do not invent a visual target when neither side is accessible; ask for the missing reference only when it blocks a meaningful comparison.
-2. **Check the repository contract.** Read the project instructions, package scripts, and the route/component that owns the visible behavior. Note the existing design tokens, UI primitives, responsive breakpoints, and any local data or auth requirements.
-3. **Capture both states.** Open the same route at matching desktop and mobile viewport sizes. Record visible text, hierarchy, controls, major dimensions, spacing, colors, borders, loading/empty/error states, and horizontal overflow. Use screenshots or browser inspection when available; do not rely on HTML status alone.
-4. **Separate visual from behavioral differences.** Confirm whether the mismatch comes from CSS/layout, different data, route state, feature flags, auth, server rendering, or a runtime error. Reproduce the difference locally before editing. Prefer the smallest falsifiable hypothesis, such as "the local route still uses the old card wrapper".
-5. **Trace to the owning abstraction.** If the route only forwards content, step to the nearest component or style token that computes the mismatched layout. Avoid duplicating a deployed snapshot or editing generated build output.
-6. **Make the smallest focused edit.** Preserve public APIs, existing interaction behavior, accessibility labels, and local design conventions. Reuse existing UI primitives and tokens. Keep desktop and mobile behavior explicit; do not fix one viewport by breaking the other.
-7. **Run focused validation immediately.** After the first edit, run the narrowest available check for the touched slice: a route/browser check, targeted test, typecheck, or lint. Repair local failures before making unrelated changes.
-8. **Validate the full delivery path.** Run the relevant production build, then inspect the built route if the project provides a preview command. Recheck both desktop and mobile, including console/page errors, visible content, and horizontal overflow. Confirm that the result matches the target in structure and visual hierarchy, not merely that it returns HTTP 200.
-9. **Report the result.** Summarize the changed files, the visual/behavioral differences corrected, and the exact validation commands and outcomes. Mention any target-side limitation, unavailable deployed route, or residual visual uncertainty.
+1. **Establish the comparison.** Identify the exact route, local URL, and deployed/Vercel URL. Reuse shared browser pages and user screenshots when available. If one URL is missing, inspect project routes and find the closest equivalent; ask only if the missing reference blocks comparison.
+2. **Confirm local is canonical.** Load the local route and inspect the owning source, recent changes, repository instructions, and design conventions. Verify that local renders the updated intended state before using it as the reference. Do not infer the desired design from a potentially stale deployment.
+3. **Capture equivalent states.** Open the same route at matching desktop and mobile sizes on both local and deployed. Keep data, viewport, route state, and auth conditions as comparable as possible. Record hierarchy, text, controls, layout, colors, loading/empty/error states, overflow, and console/page errors. Use visual inspection, not status codes alone.
+4. **Classify each difference.** Decide whether it is a UI regression, stale deployment, data/state mismatch, feature flag/auth difference, runtime error, or expected environment variation. Compare build/version evidence when useful. A deployed difference does not by itself justify changing local code.
+5. **Choose the correct owner.** For a stale deployment, fix the source/build/deployment path; preserve the newer local implementation. For a real local defect, trace to the component or style token that controls it. Treat deployed-only behavior as stale by default; note evidence of an intentional release difference, but do not copy it into local unless the user changes the source-of-truth instruction.
+6. **Make focused local changes only when needed.** Preserve local behavior, APIs, accessibility, and design-system conventions. Avoid copying generated output or duplicating a production snapshot. Do not deploy unless the user requests deployment.
+7. **Validate immediately and end to end.** Run the narrowest check after the first edit. Then verify local rendering and, when feasible, the production build on desktop and mobile. Check interactions, visible content, console/page errors, and overflow; do not claim deployed parity until the deployed version has actually been checked.
+8. **Report the comparison.** State which side is newer, whether the deployment matches local, any local fixes made, exact validation performed, and limitations such as an inaccessible deployment or unverified redeploy.
 
 ## Decision Points
 
-- **Deployed view unavailable:** use the user-provided screenshot or browser reference when available; otherwise make a best-effort comparison from the local route, project conventions, and any existing production artifacts. Ask for a URL or screenshot only when the missing reference makes the requested visual decision genuinely ambiguous.
-- **Data differs but structure matches:** do not change layout code to compensate for fixture or auth differences. Trace the data path and state the assumption.
-- **Local view is correct but Vercel is stale:** verify the production build/deployment source and report deployment freshness rather than changing UI code.
-- **Only mobile differs:** adjust responsive classes or constraints at the owning component and validate desktop again.
-- **Runtime or build error:** fix the error before judging visual parity; a blank page is not a valid comparison.
-- **Unrelated dirty changes:** preserve them and limit edits to the requested UI surface.
+- **Deployed view unavailable:** compare the user screenshot with local, or report that deployed parity could not be verified. Do not invent deployed details.
+- **Local view is correct but deployment is stale:** keep local unchanged; investigate the build/deployment source and report the version gap. Do not deploy without authorization.
+- **Data or auth differs:** distinguish content/state variation from visual drift. Do not alter layout to compensate for mismatched data; document the assumption.
+- **Possible intentional deployed-only behavior:** keep local as the expected result, report the evidence, and ask only before taking an action that would alter deployment scope or reverse the user's local-first instruction.
+- **Only mobile differs:** adjust responsive styles at the owning component and recheck desktop.
+- **Runtime/build error:** resolve it before judging visual parity; an error or blank screen is not a valid comparison.
+- **Unrelated dirty changes:** preserve them and limit edits to the requested surface.
 
 ## Completion Checklist
 
-- [ ] The exact route and comparison target were identified.
-- [ ] The mismatch was reproduced or clearly isolated to a known environment difference.
-- [ ] The owning component or style token was edited, not generated output.
+- [ ] The exact route and local/deployed versions were identified.
+- [ ] Local was verified as the intended, updated reference.
+- [ ] Differences were separated into UI, data/state, runtime, and deployment causes.
+- [ ] Any code edit targeted the owning source, not generated output.
 - [ ] Existing interactions and accessibility behavior remain intact.
-- [ ] Desktop and mobile rendering were checked.
+- [ ] Local desktop and mobile rendering were checked; deployed rendering was checked when accessible.
 - [ ] No new console/page errors or horizontal overflow appeared.
-- [ ] Typecheck, lint, test, or build validation was run as available.
-- [ ] The final summary names residual assumptions or unavailable evidence.
+- [ ] Relevant typecheck, lint, tests, or build validation passed.
+- [ ] The summary says whether deployment was actually verified or remains stale/unverified.
