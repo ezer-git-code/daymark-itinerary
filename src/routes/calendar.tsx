@@ -26,7 +26,6 @@ import {
   useTripWorkspace,
 } from "@/components/app-shell";
 import { ItemBlock } from "@/components/item-block";
-import { KindIcon } from "@/components/kind-badge";
 import { Button } from "@/components/ui/button";
 import type { DropTarget } from "@/lib/dnd";
 import type { Location } from "@/lib/types";
@@ -292,8 +291,7 @@ function CalendarPage() {
                   <p className="text-sm text-muted-foreground">Nothing dated for this day.</p>
                 ) : (
                   dayItems.map((item) => (
-                    <div key={item.id} className="flex items-start gap-2">
-                      <KindIcon kind={item.kind} className="mt-4 text-primary" />
+                    <div key={item.id} className="flex items-start">
                       <DraggableItem item={item} className="min-w-0 flex-1">
                         {(handle) => (
                           <ItemBlock
