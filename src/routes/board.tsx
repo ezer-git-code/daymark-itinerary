@@ -55,7 +55,7 @@ function BoardPage() {
             }}
           />
         ) : (
-          <div className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6">
+          <div className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6 sm:[mask-image:linear-gradient(to_right,black_calc(100%-4rem),transparent)] sm:pr-16">
             {w.locations.map((loc) => {
               const locItems = w.items.filter((i) => i.locationId === loc.id);
               const actualTotal = sumLocal(locItems, "actualLocal");

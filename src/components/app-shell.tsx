@@ -94,10 +94,13 @@ export function AppShell({
   children,
   title,
   actions,
+  showRate = true,
 }: {
   children: React.ReactNode;
   title?: string;
   actions?: React.ReactNode;
+  /** Show the exchange-rate line under the title (off for price-free pages). */
+  showRate?: boolean;
 }) {
   useRegisterSW();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -225,7 +228,7 @@ export function AppShell({
             <div>
               <p className="text-xs tracking-wide text-muted-foreground uppercase">{trip?.name}</p>
               <h1 className="font-display text-3xl font-medium tracking-tight">{title}</h1>
-              {trip && rate != null && (
+              {showRate && trip && rate != null && (
                 <p className="mt-1 text-xs text-muted-foreground">
                   {formatRate(rate, trip.currency, homeCurrency)}
                   {trip.customRate ? " · custom" : ""}
@@ -239,7 +242,7 @@ export function AppShell({
 
       {pathname !== "/" && (
         <nav
-          className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-background/95 pb-[env(safe-area-inset-bottom)] sm:hidden"
+          className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-background pb-[env(safe-area-inset-bottom)] sm:hidden"
           aria-label="Views"
         >
           <ul className="grid grid-cols-6">

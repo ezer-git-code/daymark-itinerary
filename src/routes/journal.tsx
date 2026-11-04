@@ -40,6 +40,7 @@ function JournalPage() {
   return (
     <AppShell
       title="Journal"
+      showRate={false}
       actions={
         <Button variant="outline" onClick={exportMarkdown}>
           Export Markdown
